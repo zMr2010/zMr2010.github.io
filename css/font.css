@@ -3,5 +3,8 @@ body {
     font-family: "LXGW WenKai Screen", "Hannotate SC", "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     color: rgb(51, 51, 51);
     line-height: 1.6;
+}
+
+.mjx-container {
     font-size: 90% !important;
 }
