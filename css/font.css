@@ -9,3 +9,7 @@ body {
 mjx-container {
     font-size: 100% !important;
 }
+
+div#post>article {
+    font-size: 122% !important;
+}
