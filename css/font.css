@@ -22,3 +22,7 @@ a.blog-slider__img {
     width: 281px !important;
     height: 203px !important;
 }
+
+body > div.page#body-wrap > header {
+    box-shadow: 0px 10px 10px;
+}
