@@ -24,5 +24,5 @@ a.blog-slider__img {
 }
 
 body > div.page#body-wrap > header {
-    box-shadow: 0px 10px 10px;
+    box-shadow: 0px 10px 10px !important;
 }
