@@ -2495,7 +2495,7 @@ body[data-type='about'] #web_bg {
   min-height: 380px;
   width: 39%;
   background-size: cover;
-  color: var(--anzhiyu-white);
+  color: var(--sidebar-bg);
   overflow: hidden;
 }
 #about-page .about-statistic::after {
@@ -2541,7 +2541,7 @@ body[data-type='about'] #web_bg {
   font-size: 16px;
   border-radius: 15px;
   width: 100%;
-  color: var(--anzhiyu-white);
+  color: var(--sidebar-bg);
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -2628,8 +2628,8 @@ body[data-type='about'] #web_bg {
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background: var(--anzhiyu-white-op);
-  color: var(--anzhiyu-white);
+  background: var(--sidebar-bg-op);
+  color: var(--sidebar-bg);
   display: -webkit-inline-box;
   display: -moz-inline-box;
   display: -webkit-inline-flex;
@@ -2694,7 +2694,7 @@ body[data-type='about'] #web_bg {
 }
 .author-content-item .card-content .banner-button-group .banner-button:hover {
   background: var(--anzhiyu-main);
-  color: var(--anzhiyu-white);
+  color: var(--sidebar-bg);
   border-radius: 20px !important;
 }
 .author-content-item .card-content .banner-button-group .banner-button:hover i,
@@ -3029,7 +3029,7 @@ body[data-type='about'] #web_bg {
   background: -o-linear-gradient(330deg, #ff27e8 0, #ff8000 100%);
   background: -ms-linear-gradient(330deg, #ff27e8 0, #ff8000 100%);
   background: linear-gradient(120deg, #ff27e8 0, #ff8000 100%);
-  color: var(--anzhiyu-white);
+  color: var(--sidebar-bg);
   background-size: 200%;
   -webkit-animation: gradient 15s ease infinite;
   -moz-animation: gradient 15s ease infinite;
@@ -3100,7 +3100,7 @@ body[data-type='about'] #web_bg {
   background-size: cover;
   min-height: 300px;
   overflow: hidden;
-  color: var(--anzhiyu-white);
+  color: var(--sidebar-bg);
   width: 59%;
 }
 .author-content-item .content-bottom {
@@ -3175,7 +3175,7 @@ body[data-type='about'] #web_bg {
 .author-content-item.comic-content .author-content-item-tips,
 .author-content-item.comic-content .author-content-item-title {
   z-index: 2;
-  color: var(--anzhiyu-white);
+  color: var(--sidebar-bg);
   pointer-events: none;
 }
 .author-content-item.comic-content .comic-item {
@@ -3245,11 +3245,11 @@ body[data-type='about'] #web_bg {
 }
 .author-content-item.like-technology {
   min-height: 230px;
-  color: var(--anzhiyu-white);
+  color: var(--sidebar-bg);
 }
 .author-content-item.like-music {
   min-height: 400px;
-  color: var(--anzhiyu-white);
+  color: var(--sidebar-bg);
   overflow: hidden;
 }
 .author-content-item.like-music::after {
@@ -3806,7 +3806,7 @@ maxWidth1200()
   background: transparent;
 }
 [data-theme='dark'] .hello-about h1 {
-  color: var(--anzhiyu-white);
+  color: var(--sidebar-bg);
 }
 .hello-about h1 {
   font-size: 200px;
