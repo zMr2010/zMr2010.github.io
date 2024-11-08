@@ -3880,8 +3880,8 @@ maxWidth1200()
   height: 100%;
   width: 49%;
 }
-.layout > div:first-child:not(.recent-posts) {
-  width: 100%;
+.layout.hide-aside {
+  max-width: 1200px !important;
 }
 #page-header.not-home-page {
   height: 4rem !important;
