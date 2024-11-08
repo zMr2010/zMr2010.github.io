@@ -2331,7 +2331,7 @@ body[data-type='about'] #web_bg {
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  color: var(--anzhiyu-white);
+  color: var(--sidebar-bg);
   background: -webkit-linear-gradient(330deg, #5b27ff 0, #00d4ff 100%);
   background: -moz-linear-gradient(330deg, #5b27ff 0, #00d4ff 100%);
   background: -o-linear-gradient(330deg, #5b27ff 0, #00d4ff 100%);
