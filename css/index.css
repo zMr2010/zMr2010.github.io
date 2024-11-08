@@ -3883,12 +3883,6 @@ maxWidth1200()
 .layout.hide-aside {
   max-width: 1200px !important;
 }
-#page-header.not-home-page {
-  height: 4rem !important;
-}
-#page-header #site-title {
-  display: none;
-}
 @-moz-keyframes loading-bar {
   0% {
     width: 0;
