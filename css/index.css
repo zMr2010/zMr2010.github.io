@@ -3883,9 +3883,6 @@ maxWidth1200()
 .layout > div:first-child:not(.recent-posts) {
   width: 100%;
 }
-#aside-content {
-  display: none;
-}
 #page-header.not-home-page {
   height: 4rem !important;
 }
