@@ -2447,16 +2447,16 @@ body[data-type='about'] #web_bg {
   transition: 0.5s transform ease-in-out;
 }
 .aboutsiteTips .mask span[data-up] {
-  -webkit-transform: translateY(-200%);
-  -moz-transform: translateY(-200%);
-  -o-transform: translateY(-200%);
-  -ms-transform: translateY(-200%);
-  transform: translateY(-200%);
-  -webkit-transition: 0.5s -webkit-transform ease-in-out;
-  -moz-transition: 0.5s -moz-transform ease-in-out;
-  -o-transition: 0.5s -o-transform ease-in-out;
-  -ms-transition: 0.5s -ms-transform ease-in-out;
-  transition: 0.5s transform ease-in-out;
+  -webkit-transform: translateY(-200%) !important;
+  -moz-transform: translateY(-200%) !important;
+  -o-transform: translateY(-200%) !important;
+  -ms-transform: translateY(-200%) !important;
+  transform: translateY(-200%) !important;
+  -webkit-transition: 0.5s -webkit-transform ease-in-out !important;
+  -moz-transition: 0.5s -moz-transform ease-in-out !important;
+  -o-transition: 0.5s -o-transform ease-in-out !important;
+  -ms-transition: 0.5s -ms-transform ease-in-out !important;
+  transition: 0.5s transform ease-in-out !important;
 }
 .aboutsiteTips .mask span:nth-child(1) {
   background-image: -webkit-linear-gradient(45deg, #0ecffe 50%, #07a6f1);
