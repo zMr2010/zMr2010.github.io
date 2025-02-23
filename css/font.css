@@ -65,9 +65,9 @@ a.blog-slider__img {
     right: -20px;
 }
 
-/* div#post-info {
+div#post-info {
     text-align: right;
 }
 #post-info h1.post-title {
-    display: none;
-} */
+    text-align: right;
+}
