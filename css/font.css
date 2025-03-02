@@ -71,3 +71,7 @@ div#post-info {
 #post-info h1.post-title {
     text-align: right;
 }
+
+main#content-inner {
+    max-width: 94.5%;
+}
