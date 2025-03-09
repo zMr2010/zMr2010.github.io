@@ -1,0 +1,572 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【奇技淫巧】欧拉函数与欧拉定理 | 祝馀宫</title><meta name="author" content="仙蕊缀锦"><meta name="copyright" content="仙蕊缀锦"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="欧拉？有点意思哈……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【奇技淫巧】欧拉函数与欧拉定理">
+<meta property="og:url" content="https://blog.517group.cn/posts/33291/index.html">
+<meta property="og:site_name" content="祝馀宫">
+<meta property="og:description" content="欧拉？有点意思哈……">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.jiuci.top/i/2025/03/08/nu4tvj.png">
+<meta property="article:published_time" content="2025-03-08T06:36:56.000Z">
+<meta property="article:modified_time" content="2025-03-09T11:27:55.734Z">
+<meta property="article:author" content="仙蕊缀锦">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="技巧">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="欧拉函数">
+<meta property="article:tag" content="欧拉定理">
+<meta property="article:tag" content="费马小定理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.jiuci.top/i/2025/03/08/nu4tvj.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.517group.cn/posts/33291/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":0,"languages":{"author":"作者: 仙蕊缀锦","link":"链接: ","source":"来源: 祝馀宫","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【奇技淫巧】欧拉函数与欧拉定理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-03-09 19:27:55'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css" /><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/side.css"><script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "pckc81gi6y");</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/ChioriAvatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">223</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">175</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/hitokoto/"><i class="fa-fw fas fa-commenting"></i><span> 一言</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://image.jiuci.top/i/2025/03/08/nu4tvj.png')"><nav id="nav"><span id="blog-info"><a href="/" title="祝馀宫"><img class="site-icon" src="/img/logo.svg#%20image"/><span class="site-name">祝馀宫</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/hitokoto/"><i class="fa-fw fas fa-commenting"></i><span> 一言</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【奇技淫巧】欧拉函数与欧拉定理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-08T06:36:56.000Z" title="发表于 2025-03-08 14:36:56">2025-03-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-09T11:27:55.734Z" title="更新于 2025-03-09 19:27:55">2025-03-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E5%B7%A7/">技巧</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【奇技淫巧】欧拉函数与欧拉定理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="文章总览：坠临万界的星芒"><a href="#文章总览：坠临万界的星芒" class="headerlink" title="文章总览：坠临万界的星芒"></a>文章总览：坠临万界的星芒</h1><p>欧拉函数和欧拉定理也是非常基础的数论知识。欧拉函数做为积性函数，并且自身携带<del>欧拉名称加持</del>各种优良性质，被广泛的运用到各个数学推导方面；而欧拉定理更是必不可少，计算逆元是它最基本的运用，它也是凌驾于费马小定理的存在（费马小定理可以从欧拉定理中得出）；并且其拓展即拓展欧拉函数还可以在取模运算中缩小大指数范围，等等等等。接下来我们介绍无所不能的——欧拉函数与欧拉定理。</p>
+<ol>
+<li><a href="#概念基础：因缘假合的人身">欧拉函数推导</a></li>
+<li><a href="#概念基础：因缘假合的人身">欧拉函数性质</a></li>
+<li><a href="#概念应用：揭示前路的言灵">欧拉函数的计算</a></li>
+<li><a href="#概念应用：揭示前路的言灵">欧拉函数拓展</a></li>
+<li><a href="#定理基础：凝眸毁灭的瞬间">欧拉定理推导</a></li>
+<li><a href="#定理拓展：劫余重生的希望">拓展欧拉定理推导</a></li>
+</ol>
+<h1 id="概念基础：因缘假合的人身"><a href="#概念基础：因缘假合的人身" class="headerlink" title="概念基础：因缘假合的人身"></a>概念基础：因缘假合的人身</h1><ul>
+<li><a href="#欧拉函数基础推导">欧拉函数推导</a></li>
+<li><a href="#欧拉函数常见性质">欧拉函数性质</a></li>
+</ul>
+<h2 id="欧拉函数基础推导"><a href="#欧拉函数基础推导" class="headerlink" title="欧拉函数基础推导"></a>欧拉函数基础推导</h2><p>关于欧拉函数，就从最基础的开始讲起。我们定义函数 $\varphi(n)$ 表示从 $1$ 到 $n$ 的数字中与 $n$ 互质的有多少个。这就是欧拉函数所表示的信息。那么关于欧拉函数我们能有什么已知的值吗？</p>
+<p>非常显然的，对于一个质数 $p$，其欧拉函数值 $\varphi(p)=p-1$ 这是显然的，因为 $p$ 作为质数显然与 $1\sim p$ 之间的除了它本身以外任何数字互质。其次有一个容易让人纰漏的点，那就是 $\varphi(1)$。根据欧拉函数的定义，我们要找到区间 $[1,1]$ 中与 $1$ 互素的数的个数，互素的定义就是最大公约数等于 $1$，所以 $\varphi(1)=1$ 是显而易见的。</p>
+<p>那么对于非质数的值我们能如何计算呢？由于质数的美妙性质，我们纵使是考虑合数，也一般先从质数的幂次下手，那么对于质数 $p$，我们考虑它的 $k$ 次幂的欧拉函数 $\varphi(p^k)$ 。</p>
+<p>显然的在 $[1,p^k]$ 的区间范围内，只要不存在因子 $p$ 的数都与 $p^k$ 互素，也就是说，我们只需要从总量中减去 $p$ 的倍数就可以了。根据小学就学过的容斥原理，在 $[1,p^k]$ 范围内显然质数 $p$ 的倍数有 $p^k/p=p^{k-1}$ 个，那么  $\varphi(p^k)=p^{k}(1-\frac{1}{p})\ $。</p>
+<p>这样考虑完了质数的幂次，接下来考虑两个质数相乘的结果，设 $n=pq$ 且 $p,q$ 均为质数。那么我们如果从容斥原理的角度来讲，在 $[1,n]$ 的范围内我们要计算的就是含有质因子 $p,q$ 任意其一的数字的数量。而如果直接从总量减去 $p$ 的倍数再减去 $q$ 的倍数的话，有 $pq$ 为因子的数字就会被减去两边，那么我们就还要把他加回来，然后可以推导出下式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\varphi(n)
+&=n-\frac{n}{p}-\frac{n}{q}+\frac{n}{pq}\\
+&=n\left(1-\frac{1}{p}-\frac{1}{q}+\frac{1}{pq}\right)\\
+&=n\left(1-\frac{1}{p}\right)\left(1-\frac{1}{q}\right)
+\end{aligned}</script><p>关于第二步到第三部的转换，只是一个简单的因式分解而已，可以尝试倒推回去验证一下。</p>
+<p>然后我们就惊人的注意到不管是质数，质数的幂次，还是两个质数乘积，其答案都表现为了一个共同的值！这难道真的是巧合吗？看下表分析：</p>
+<script type="math/tex; mode=display">
+\boxed{
+\begin{array}{c|c}
+\tt value\ of \ n & \tt formula\ we\ get & \tt same\ part\\
+n=p & \varphi(p)=p-1 & \varphi(p)=p\left(1-\cfrac{1}{p}\right)\\
+n=p^k & \varphi(p^k)=p^k-p^{k-1} & \varphi(p^k)=p^k\left(1-\cfrac{1}{p}\right)\\
+n=pq & \varphi(n)=n-\cfrac{n}{p}-\cfrac n q+\cfrac n {pq} & \varphi(n)=n\left(1-\cfrac 1 p\right)\left(1-\cfrac 1 q\right)
+\end{array}
+}</script><p>我们甚至可以有一个大胆的猜测，$\varphi(n)$ 的计算公式可以是下面这样（其中 $n=\prod_{i=1}^kp_i^{\alpha_i}$ 即整数唯一分解定理拆解 $n$ 的结果，$p_i$ 为 $n$ 所有素因子，$\alpha_i$ 为对应素因子的幂次）</p>
+<script type="math/tex; mode=display">
+\varphi(n)=n\prod_{i=1}^k\left(1-\frac{1}{p_i}\right)</script><p>事实上确实如此。为什么这样是对的呢？或者换句话说这个问题的主要来源应该是为什么这样可以正确处理容斥。比较显然的是，展开后的结果中的某一个分数的分母如果是由偶数个因子组成，那么对应符号就是 <code>+</code>，否则是 <code>-</code> 。我们可以观察一下小时候学过的韦恩图或者说文氏图的结构，一眼顶针就可以看出结论。</p>
+<p><img src="https://image.jiuci.top/i/2025/03/08/vli2wh.png" style="zoom:50%;" alt="1~30范围内不同质因数因子的倍数" /></p>
+<h2 id="欧拉函数常见性质"><a href="#欧拉函数常见性质" class="headerlink" title="欧拉函数常见性质"></a>欧拉函数常见性质</h2><p>欧拉函数的性质应该是挺多的，首先说一个关于它本身的性质——欧拉函数是<strong>积性函数</strong>。</p>
+<blockquote>
+<p><strong>定义：</strong>什么是积性函数？</p>
+<p>若一个函数 $f(x)$ 满足 $f(1)=1$，且当 $\gcd(a,b)=1$ 时，$f(ab)=f(a)f(b)$，则该函数被称为<strong>积性函数</strong>。特别的，若 $gcd(a,b)\neq 1$ 时，$f(ab)$ 依然满足 $f(ab)=f(a)f(b)$ 则函数 $f(x)$ 被称为<strong>完全积性函数</strong>。</p>
+</blockquote>
+<p>有了上面的定义其实理解欧拉函数时积性函数并不困难，可以自己代入几个数推导一下。显然的 $\varphi(1)=1$，这是介绍欧拉函数时一开始介绍到的，满足积性函数定义中的第一个条件。那么如果 $(a,b)=1$ 的话，$\varphi(ab)$ 时候会像刚刚积性函数的定义中写的那样 $\varphi(ab)=\varphi(a)\varphi(b)$ 呢？</p>
+<p>答案是可以的，在 <a target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/basic/#剩余系的复合">OI-wiki</a> 中给出了一个使用剩余系的证明，<del>不过我没看懂</del>不过不太好理解，所以我们可用相对简单的方式来验证关于欧拉函数时积性函数的命题，那就是直接套公式。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\mathrm{According\ to\ the\ integer\ partition\ theorem,}\\
+& a=\prod_{i=1}^{k_1}p_i^{\alpha_i},b=\prod_{i=1}^{k_2}q_i^{\beta_i}\\
+& \because \gcd(a,b)=1\qquad \therefore ab=\left(\prod_{i=1}^{k_1}p_i^{\alpha_i}\right)\left(\prod_{i=1}^{k_2}q_i^{\beta_i}\right)\\
+&
+\begin{aligned}
+\;\therefore\varphi(ab)
+&=ab\left(\prod_{i=1}^{k_1}\left(1-\frac{1}{p_i}\right)\right)\left(\prod_{i=1}^{k_2}\left(1-\frac{1}{q_i}\right)\right)\\
+&=\left(a\prod_{i=1}^{k_1}\left(1-\frac{1}{p_i}\right)\right)\left(b\prod_{i=1}^{k_2}\left(1-\frac{1}{q_i}\right)\right)\\
+&=\varphi(a)\varphi(b)
+\end{aligned}
+\\
+&
+\therefore \varphi(n) \mathrm{\ is\ a\ Multiplicative\ Function}
+\end{aligned}</script><p>这个应该没有什么太大的推导难度，所以我们也是直接看下一个性质：$n=\sum_{d\mid n}\varphi(d)$ 。这个式子长得非常恶心，一个求和符号下面带了一个从来没见过的东西，然后把一坨欧拉函数加起来了？这是什么意思？？？？？</p>
+<p>简单介绍一下，$d\mid n$ 表示 $d$ 是 $n$ 的约数，那么这个式子的意思就很明显了，不过这是为什么呢？如何证明它？这让我们一头雾水，学过莫比乌斯反演的同志都知道，这是简单一个莫比乌斯反演就可以解决的问题。不过我们跳过莫比乌斯反演，考虑别的证法（<del>绝对不是因为我不会</del></p>
+<blockquote>
+<p><strong>证明：</strong></p>
+<p>如果 $\gcd(a,b)=g$ 那么显然的 $\gcd(\frac{a}{g},\frac{b}{g})=1$。如果我们定义一个新的函数 $f(x)$ 表示区间范围 $[1,n]$ 的数字中满足 $\gcd(k,n)=x$ 的整数 $k$ 的个数。则显然 $f(x)$ 等价于 $\varphi(\frac{n}{x})$，整体除以最大公约数 $x$ 后，这些满足条件的数就变成和 $n$ 互质的了，这满足欧拉函数的定义，所以显然等价。</p>
+<p>那么根据 $f$ 的定义，我们其实可以有 $n=\sum_{i=1}^nf(i)$，这是因为我们枚举了这个范围内所有的数作为最大公约数，那么范围内所有数都逃不掉，他们的总和自然是区间的大小 $n$。</p>
+<p>又因为等价，所以替换为 $n=\sum_{i=1}^n\varphi(\frac{n}{i})$，由于如果 $i\nmid n$ 那么这个欧拉函数显然没有意义，就可以转化为 $n=\sum_{d\mid n}\varphi(\frac{n}{d})$，但是这个最终的答案还是差了那么一点点，这怎么办？注意到这里的 $d\mid n$ 与 $\varphi(\frac{n}{d})$ 存在对称性，那么等价的就可以换为：</p>
+<script type="math/tex; mode=display">
+n=\sum_{d\mid n}\varphi(d)</script><p>证毕！</p>
+</blockquote>
+<p>这里熟练运用 $\gcd$ 的性质比较常用，一会也要用到，算是比较重要的知识点。除此之外还有最后一个性质，但是这个最后一个性质比较简单，也可以套用通项公式暴力推导求解，所以不讲了，性质放在这，感兴趣的自行推导：</p>
+<script type="math/tex; mode=display">
+\varphi(mn)\varphi(\gcd(m,n))=\varphi(m)\varphi(n)\gcd(m,n)</script><p>接下来介绍关于欧拉函数的一些小应用。</p>
+<h1 id="概念应用：揭示前路的言灵"><a href="#概念应用：揭示前路的言灵" class="headerlink" title="概念应用：揭示前路的言灵"></a>概念应用：揭示前路的言灵</h1><ul>
+<li><a href="#欧拉函数计算">欧拉函数的计算</a></li>
+<li><a href="">欧拉函数拓展</a></li>
+</ul>
+<h2 id="欧拉函数计算"><a href="#欧拉函数计算" class="headerlink" title="欧拉函数计算"></a>欧拉函数计算</h2><p>关于欧拉函数的计算，目前主要的方法是线性筛，这个在我的文章里面讲过，可以去看。</p>
+<blockquote>
+<p><strong>友情链接：</strong></p>
+<p><a href="https://blog.517group.cn/posts/39663/">【算法介绍】杜教筛和 Min_25 筛 | 祝馀宫</a></p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; pri;</span><br><span class="line"><span class="type">bool</span> isp[N];</span><br><span class="line"><span class="type">int</span> phi[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">Init</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    phi[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!isp[i]) &#123;</span><br><span class="line">            pri.<span class="built_in">push_back</span>(i);</span><br><span class="line">            phi[i] = i - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;p : pri) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i * p &gt; n) <span class="keyword">break</span>;</span><br><span class="line">            isp[i * p] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(i % p == <span class="number">0</span>) &#123;</span><br><span class="line">                phi[i * p] = phi[i] * p;</span><br><span class="line">            	<span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            phi[i * p] = phi[i] * phi[p];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="欧拉函数反演"><a href="#欧拉函数反演" class="headerlink" title="欧拉函数反演"></a>欧拉函数反演</h2><p>这个作为一个拓展内容吧……简单介绍一下，反演就是一种变换式子的方式。我们可以来看一个非常非常基础的例子，首先借用欧拉函数的性质之一：</p>
+<script type="math/tex; mode=display">
+n=\sum_{d\mid n}\varphi(d)</script><p>代入 $n=\gcd(a,b)$，就会得到下面这样的式子：</p>
+<script type="math/tex; mode=display">
+\gcd(a,b)=\sum_{d\mid \gcd(a,b)}\varphi(d)=\sum_{d}[d\mid a][d\mid b]\varphi(d)</script><p>这显然是等价的，因为一个数 $d$ 如果既是 $a$ 的因子也是 $b$ 的因子那么它一定是最大公约数的因子，不然的话就说明这个最大公约数是假的，还存在更大的公约数。但这不是重点，如果对 $\gcd(i,n)$ 求和，我们会惊喜的发现：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\sum_{i=1}^n\gcd(i, n)
+&=\sum_{i=1}^n\sum_{d}[d\mid i][d\mid n]\varphi(d)\\
+&=\sum_{d}\sum_{i=1}^n[d\mid i][d\mid n]\varphi(d)\\
+&=\sum_{d}\left\lfloor\frac{n}{d}\right\rfloor[d\mid n]\varphi(d)\\
+&=\sum_{d\mid n}\left\lfloor\frac{n}{d}\right\rfloor\varphi(d)
+\end{aligned}</script><p>这个过程就被我们称为欧拉反演。</p>
+<h1 id="定理基础：凝眸毁灭的瞬间"><a href="#定理基础：凝眸毁灭的瞬间" class="headerlink" title="定理基础：凝眸毁灭的瞬间"></a>定理基础：凝眸毁灭的瞬间</h1><ul>
+<li>欧拉定理推导</li>
+</ul>
+<p>讲完欧拉函数，我们接下来讲欧拉定理，这两个东西其实关系不算特别大，只是因为欧拉定理需要用到一点点关于欧拉函数的定义，又因为他们都姓欧拉，所以放在一起讲了。欧拉定理的内容大致如下（其中 $a,m$ 互质）</p>
+<script type="math/tex; mode=display">
+a^{\varphi(m)}\equiv 1\pmod m</script><p>但是在此之前，你一定听过另外一个定理，那就是费马小定理，内容是若 $m$ 为素数，则：</p>
+<script type="math/tex; mode=display">
+a^{p-1}\equiv 1\pmod p</script><p>不难发现费马小定理其实就是欧拉定理的特殊情况，这是因为 $\varphi(p)=p-1$ 造就了费马小。我们可以简单的先证明费马小定理，然后尝试能不能从中学习到一些经验最后得到结果。</p>
+<p>那么关于定理证明，我们或许第一下想到的就是数学归纳法，这是非常常用的一个技巧。</p>
+<blockquote>
+<p><strong>证明：</strong>数学归纳法证明费马小定理。</p>
+<p>费马小定理 $a^{p-1}\equiv1\pmod p$ 等价于 $a^p\equiv a\pmod p$。非常显然 $1^p\equiv 1\pmod p$ 是成立的，如果我们假设 $a^p\equiv a\pmod p$ 成立，则有二项式定理可以计算 $(a+1)^p$ ：</p>
+<script type="math/tex; mode=display">
+(a+1)^p=a^p+\binom{p}{1}a^{p-1}+\binom{p}{2}a^{p-2}+\cdots+\binom{p}{p-1}a+1</script><p>这中间很大一坨组合数完全不知道怎么化简，但别忘了，我们要算的是模 $p$ 意义下的结果。显然当 $k\in[1,p)$ 时我们根据组合数的计算公式都可以得到 $C_p^k\equiv0\pmod p$，则该式子在模 $p$ 意义下等价于：</p>
+<script type="math/tex; mode=display">
+(a+1)^p\equiv a^p+1\pmod p</script><p>又因为我们假设 $a^p\equiv a\pmod p$ 所以该式化简为 $(a+1)^p\equiv a+1\pmod p$ 证明成立。</p>
+</blockquote>
+<p>但是显然的这个数学归纳的思路是无法拓展到欧拉定理上的，因为二项式定理拆解之后我们无法证明那一坨东西的值在模 $p$ 意义下为 $1$ 。所以如果我们仍然要沿用数学归纳的思路，必须另辟蹊径，注意到我们在推欧拉函数的时候，将数字分为了四类：</p>
+<ol>
+<li>$\varphi(1)=1$</li>
+<li>$\varphi(p)=p-1$</li>
+<li>$\varphi(p^k)=p^k(1-\frac{1}{p})=p^{k-1}(p-1)$</li>
+<li>$\gcd(a,b)=1,\varphi(ab)=\varphi(a)\varphi(b)$</li>
+</ol>
+<p>那么有一个思路就应运而生：我们将前三类作为数学归纳的基例，那么第四类就显然了。</p>
+<blockquote>
+<p><strong>证明：</strong>数学归纳法证明欧拉定理。</p>
+<p>按照刚刚的思路我们处理数学归纳的基例。显然的我们这里数学归纳法归纳的不是 $a$ 而是模数 $m$，但这个不影响，因为我们的基例和推导始终都是对所有 $\gcd(a,n)=1$ 的 $a$ 有效的。</p>
+<p><strong>基例基础处理</strong></p>
+<ol>
+<li>首先显然的 $\varphi(1)=1$，$a^{1}\equiv 1\pmod 1$ 是显然的，只要 $a$ 是整数都成立。<br><em>不要被这个 $a^1\equiv1\pmod 1$ 迷惑了，这是因为两边在模 $1$ 意义下都为 $0$ 才这么写（</em></li>
+<li>第二是 $\varphi(p)=p-1$，这时候欧拉定理退化为费马小定理，略。</li>
+<li>接下来是重头戏，只要证明了 $a^{\varphi(p^k)}\equiv 1$，那么就变得特别简单了。</li>
+</ol>
+<p><strong>基例特殊情况</strong></p>
+<p>那么我们可以对于 $p$ 的幂次 $k$ 进行归纳，这时候的基例就是刚刚的第二例基例即费马小。我们这时候做出归纳假设设对于 $a^{p^{k-1}(p-1)}\equiv1\pmod{p^k}$ 成立，这里是直接用一开始算出来的欧拉函数值把 $\varphi(p^k)$ 替换了。</p>
+<p>那么我们的目标就是递推出 $a^{p^k(p-1)}\equiv1\pmod{p^{k-1}}$。因为取模的定义，我们可以把归纳假设成立的式子变换为 $a^{p^{k-1}(p-1)}=1+mp^k$，其中 $m$ 为任意整数。然后我们左右两边各自做上 $p$ 次方：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+a^{p^{k-1}(p-1)}&=1+mp^k\\
+\left(a^{p^{k-1}(p-1)}\right)^p&=\left(1+mp^k\right)^p\\
+a^{p^{k}(p-1)}&=\left(1+mp^k\right)^p\\
+&=1+\binom{p}{1}mp^k+\binom{p}{2}\left(mp^k\right)^2+\cdots+\left(mp^k\right)^p
+\end{aligned}</script><p>接下来又是熟悉的操作，我们要证明这玩意在模 $p^{k+1}$ 意义下为 $1$，那么简单的分讨一下：</p>
+<ol>
+<li>$1$ 显然在模 $p^{k+1}$ 意义下为 $1$，那么剩下来的部分就都得是 $0$ 。</li>
+<li>$C_p^1=p$，代入到那一项刚好是 $mp^{k+1}$ 模 $p^{k+1}$ 的意义下确实是 $0$ 。</li>
+<li>剩下的部分就是 $C_p^i(mp^k)^i$ 其中 $i\in[2,p]$ 的部分了，显然因为 $k\ge 1$ 所以 $2k\ge k+1$ 这就说明这些项也是在模 $p^{k+1}$ 意义下为 $0$ 的。</li>
+</ol>
+<p>综上可以得到该式等价于 $a^{p^{k}(p-1)}\equiv1\pmod{p^{k+1}}$，那么对于这一类的基例也就推导完毕了。接下来就是证明欧拉定理的最终阶段。</p>
+<p><strong>数学归纳部分</strong></p>
+<p>设模数 $m=ab$ 其中 $a,b\gt1$ 且 $\gcd(a,b)=1$，那么假设下面两个等式成立：</p>
+<script type="math/tex; mode=display">
+x^{\varphi(a)}\equiv1\pmod a,\quad x^{\varphi(b)}\equiv1\pmod b</script><p>为了防止冲突底数从 $a$ 换做了 $x$，含义不变。然后我们在很显然的可以得出下面两个式子：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+x^{\varphi(n)}&\equiv x^{\varphi(a)\varphi(b)}\equiv(x^{\varphi(a)})^{\varphi(b)}\equiv 1^{\varphi(b)}\equiv1\pmod a\\
+x^{\varphi(n)}&\equiv x^{\varphi(a)\varphi(b)}\equiv(x^{\varphi(b)})^{\varphi(a)}\equiv 1^{\varphi(a)}\equiv1\pmod b
+\end{aligned}</script><p>根据中国剩余定理，我们可以得到 $x^{\varphi(a)\varphi(b)}\equiv1\pmod{\operatorname{lcm}(a,b)}$ 即 $x^{\varphi(n)}\equiv1\pmod{n}$。</p>
+<p>那么至此归纳结束，欧拉定理证明完毕了。</p>
+</blockquote>
+<p>关于最后一个根据中国定理，这个又是另一个内容了，可以去看我的博文：</p>
+<blockquote>
+<p><strong>友情链接：</strong></p>
+<p><a href="https://blog.517group.cn/posts/64292/">【算法介绍】中国剩余定理及其拓展 | 祝馀宫</a></p>
+</blockquote>
+<p>看完了就知道关于同余方程组的解只有下面一种可能性：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+x\equiv a\pmod{p_1}\\
+x\equiv a\pmod{p_2}\\
+\end{cases}
+\Longrightarrow
+x\equiv a\pmod{\operatorname{lcm}(p_1,p_2)}</script><p>而在上面 $\gcd(a,b)=1$，所以他们的最大公约数自然就是 $n$。</p>
+<p>这些定理的证明全都是基于代数方法的，事实上还有更加简便的方式，就是从剩余系考虑。简单介绍一下剩余系这个概念：我们把在模 $m$ 意义下所有的可能的余数的集合，称为模数 $m$ 的<strong>完全剩余系</strong>，即 $\{0,1,\dots,m-1\}$ 这个集合。如果把这个集合内不与 $m$ 互质的数去掉，只剩下与 $m$ 互素的，那么被称为<strong>简化剩余系</strong>。</p>
+<p>关于刚刚两个定理，我们可以用剩余系的角度来证明一波：</p>
+<blockquote>
+<p><strong>证明：</strong>费马小定理</p>
+<p>构造一个序列：$A=\{1,2,3\dots,p-1\}$，这个序列有着这样一个性质：</p>
+<script type="math/tex; mode=display">
+\prod_{i=1}^{p-1}\space A_i\equiv\prod_{i=1}^{p-1} (A_i\times a) \pmod p</script><p>序列性质证明：</p>
+<p>$\because (A_i,p)=1,(a,p)=1\quad\therefore(A_i\times a,p)=1$</p>
+<p>又因为每一个 $A_i\times a \pmod p$ 都是独一无二的，且 $A_i\times a \pmod p &lt; p$</p>
+<p>得证（每一个 $A_i\times a$ 都对应了一个 $A_i$）</p>
+<p>设 $f=(p-1)!$，则 $f\equiv a\times A_1\times a\times A_2\times a \times A_3 \dots \times  A_{p-1} \pmod p$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+a^{p-1}\times f &\equiv f \pmod p \\
+a^{p-1} &\equiv 1 \pmod p
+\end{aligned}</script><p>证毕。</p>
+</blockquote>
+<p>因为剩余系内的这些元素独一无二，总量不变，从而得到一个特殊的性质来证明费马小，这是一个不错的想法，非常显然的，这个证明方式在欧拉定理中也生效，我们构造出关于模数 $m$ 的简化剩余系，使用和刚刚费马小一样的证明方式即可得证，不再赘述。</p>
+<h1 id="定理拓展：劫余重生的希望"><a href="#定理拓展：劫余重生的希望" class="headerlink" title="定理拓展：劫余重生的希望"></a>定理拓展：劫余重生的希望</h1><ul>
+<li>拓展欧拉定理推导</li>
+</ul>
+<p>拓展欧拉定理就是关于欧拉定理的一个拓展，其内容如下：</p>
+<script type="math/tex; mode=display">
+a^b\equiv\begin{cases}
+a^{b\bmod\varphi(m)}, & \gcd(a,m)=1;\\
+a^b,& \gcd(a,m)\neq1,b<\varphi(m);\\
+a^{(b\bmod\varphi(m))+\varphi(m)},&\gcd(a,m)\neq1,b\ge\varphi(m);
+\end{cases}
+\pmod m</script><p>拓展欧拉定理的作用也很显然，就是降幂，高幂次的计算可以在拓展欧拉定理的作用下变成 $\varphi(m)$ 级别，当然 $m$ 不能特别大，不然我们也算不了。</p>
+<p>关于拓展欧拉定理的证明，这个我们来一个各个击破：</p>
+<blockquote>
+<p><strong>证明：</strong>拓展欧拉定理</p>
+<p><strong>Case 1.</strong> 证明 $a^b\equiv a^{b\bmod\varphi(m)}\pmod m,\gcd(a,m)=1$。</p>
+<p>讲模运算替换为 $b=k\cdot\varphi(m)+r$，根据定义 $0\le r&lt;\varphi(m)$，那么式子就可以转化：</p>
+<script type="math/tex; mode=display">
+a^{b}\equiv a^{k\varphi(m)}\cdot a^r\equiv a^r\equiv a^{b\bmod\varphi(m)}\pmod m</script><p>其中 $a^{k\varphi(m)}$ 被消掉的原因是欧拉定理 $a^{\varphi(m)}\equiv1\pmod m$。</p>
+<p><strong>Case 2.</strong> 证明 $a^b\equiv a^b\pmod m,\gcd(a,m)\neq1,b&lt;\varphi(m)$。</p>
+<p><del>就这还要证明？？？？？？？？？</del></p>
+<p>这条定理的作用是使得我们降幂到一定程度后告诉我们可以不用降幂了。</p>
+<p><strong>Case 3.</strong> 证明 $a^{(b\bmod\varphi(m))+\varphi(m)}\pmod m,\gcd(a,m)\neq1,b\ge\varphi(m)$。</p>
+<p>首先显然的，因为乘方的特殊性质，我们会发现证明这样一个 $a$ 和证明他其中一个质因子 $p_i$ 满足该定理是等价的，我们可以给一个简单的证明。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&a=\prod_{i=1}^kp_i^{r_i}\\
+&({p_i}^b)^{r_i}\equiv({p_i}^{(b\bmod\varphi(m))+\varphi(m)})^{r_i}\pmod m\\
+&(p_i^{r_i})^b\equiv(p_i^{r_i})^{(b\bmod\varphi(m))+\varphi(m)}\pmod m\\
+&(p_1^{r_1}p_2^{r_2}p_3^{r_3}\cdots)^b\equiv(p_1^{r_1}p_2^{r_2}p_3^{r_3}\cdots)^{(b\bmod\varphi(m))+\varphi(m)}\pmod{m}\\
+&a^b\equiv a^{(b\bmod\varphi(m))+\varphi(m)}\pmod m
+\end{aligned}</script><p>就是一路用乘方的性质推下去即可。</p>
+<p>加下来的问题转化为证明 ${p_i}^b\equiv p_i^{(b\bmod\varphi(m))+\varphi(m)}\pmod m$ 为了方便下文用 $p$ 代替 $p_i$ 。</p>
+<p>如果 $p,m$ 互质，那么这时候就是上面一开始的 <strong>Case 1.</strong> 的情况，接下来要考虑的就是不互质。由于 $p$ 是质数，那么 $m$ 就至少得是 $2p$ 以上，如果设 $m=sp^r$ 其中 $\gcd(s,p)=1$，那么由于欧拉函数是积性函数，根据定义就有 $\varphi(m)=\varphi(s)\varphi(p^r)$，接下来又是一路推导：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+p^{\varphi(m)}&=(p^{\varphi(s)})^{\varphi(p^r)}\equiv1^{\varphi(p^r)}\equiv1\pmod s\\
+p^{r+\varphi(m)}&\equiv p^r\pmod{s\times p^r}\\
+p^{r+\varphi(m)}&\equiv p^r\pmod{m}\\
+\end{aligned}</script><p>由于 $b\ge\varphi(m)\ge r$，我们有 $p^b=p^{b-r}\times p^r\equiv p^{b-r}\times p^{r+\varphi(m)}=p^{\varphi(m)+b}\pmod m$ 这时候记录一个额外的函数 $f(x)$ 表示 $p^x\bmod m\ (x\ge\varphi(m))$，那么这个式子就可以表示为 $f(x)=f(x+\varphi(m))$ 那么其实相对应的我们就有 $f(x)=f(x-\varphi(m))$。</p>
+<p>而最终的答案就是 $f(b)$ 那么就可以考虑一直减去 $\varphi(m)$ 得到结果，但由于 $f(x)$ 的参数 $x$ 满足 $x\ge\varphi(m)$，所以在减法递推的过程中还要保证 $x\ge2\varphi(m)$，最终的结果就可以是 $b\bmod\varphi(m)+\varphi(m)$ 搞定。</p>
+<script type="math/tex; mode=display">
+p^b\equiv p^{(b\bmod\varphi(m))+\varphi(m)}\pmod m</script><p>又因为这里一开始的转化，所以可以得到：</p>
+<script type="math/tex; mode=display">
+a^b\equiv a^{(b\bmod\varphi(m))+\varphi(m)}\pmod m</script><p>至此，拓展欧拉定理，证毕！</p>
+</blockquote>
+<p>关于上面 <strong>Case 3.</strong> 中提到的 $b\ge\varphi(m)\ge r$，其中 $\varphi(m)\ge r$ 的证明如下：</p>
+<blockquote>
+<p><strong>证明：</strong></p>
+<p>首先 $φ(m)=φ(s)×φ(p^r)≥φ(p^r)$（等号在 $s=1,2$ 时取到）</p>
+<p>$φ(p^r)=p^r−p^{r−1}=p^{r−1}(p−1)≥p^{r−1}$（ $p≥2$，等号在 $p=2$ 时取到）</p>
+<p>数学归纳法证 $p^{r−1}≥r$：</p>
+<ul>
+<li>$r=1$ 时显然成立；</li>
+<li>假设 $r=i$ 时 $p^{i−1}≥i$ 成立 $p^i=p×p^{i−1}≥2p^{i−1}=p^{i−1}+p^{i−1}≥p^{i−1}+1=i+1$ 成立，因此 $p^{r−1}≥r$ 成立。</li>
+</ul>
+<p>把上面所有的不等号串起来，就是 $φ(m)≥r$</p>
+</blockquote>
+<h1 id="算法实战：拓宇行天的意志"><a href="#算法实战：拓宇行天的意志" class="headerlink" title="算法实战：拓宇行天的意志"></a>算法实战：拓宇行天的意志</h1><p>查看相关算法标签喵！</p>
+<p><strong>参考资料（以下排名不分先后）</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/euler-totient/">欧拉函数 - OI Wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/fermat/#扩展欧拉定理">欧拉定理 &amp; 费马小定理 - OI Wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/1024th/p/11349355.html">欧拉定理及扩展（附超易懂证明） - 樱花赞 - 博客园</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.517Group.cn">仙蕊缀锦</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.517group.cn/posts/33291/">https://blog.517group.cn/posts/33291/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.517Group.cn" target="_blank">祝馀宫</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/%E6%8A%80%E5%B7%A7/">技巧</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a><a class="post-meta__tags" href="/tags/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/">欧拉函数</a><a class="post-meta__tags" href="/tags/%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86/">欧拉定理</a><a class="post-meta__tags" href="/tags/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/">费马小定理</a></div><div class="post_share"><div class="social-share" data-image="https://image.jiuci.top/i/2025/03/08/nu4tvj.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://npm.elemecdn.com/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://npm.elemecdn.com/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/52315/" title="【算法介绍】排列组合问题汇总"><img class="cover" src="https://image.jiuci.top/i/2025/03/02/yx12en.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【算法介绍】排列组合问题汇总</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/57613/" title="517九段第一课 E ：求和"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-23</div><div class="title">517九段第一课 E ：求和</div></div></a></div><div><a href="/posts/41036/" title="517九段第一课 D ：不互质的数"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-23</div><div class="title">517九段第一课 D ：不互质的数</div></div></a></div><div><a href="/posts/39663/" title="【算法介绍】杜教筛和 Min_25 筛"><img class="cover" src="https://image.jiuci.top/i/2025/02/12/weeu1o.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-10</div><div class="title">【算法介绍】杜教筛和 Min_25 筛</div></div></a></div><div><a href="/posts/52802/" title="【算法介绍】原根与离散对数"><img class="cover" src="https://image.jiuci.top/i/2025/02/13/gyjep7.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-04</div><div class="title">【算法介绍】原根与离散对数</div></div></a></div><div><a href="/posts/38118/" title="【奇技淫巧】特殊思维题的复杂度分析"><img class="cover" src="https://image.jiuci.top/i/2025/01/01/gwncqs.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-04</div><div class="title">【奇技淫巧】特殊思维题的复杂度分析</div></div></a></div><div><a href="/posts/20534/" title="【奇技淫巧】和式交换"><img class="cover" src="https://image.jiuci.top/i/2025/01/01/h3we6b.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-10-23</div><div class="title">【奇技淫巧】和式交换</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/ChioriAvatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">仙蕊缀锦</div><div class="author-info__description">知识，与你分享</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">223</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">175</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" href="/about/"><i class="fas fa-star"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E6%80%BB%E8%A7%88%EF%BC%9A%E5%9D%A0%E4%B8%B4%E4%B8%87%E7%95%8C%E7%9A%84%E6%98%9F%E8%8A%92"><span class="toc-number">1.</span> <span class="toc-text">文章总览：坠临万界的星芒</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%9B%A0%E7%BC%98%E5%81%87%E5%90%88%E7%9A%84%E4%BA%BA%E8%BA%AB"><span class="toc-number">2.</span> <span class="toc-text">概念基础：因缘假合的人身</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80%E6%8E%A8%E5%AF%BC"><span class="toc-number">2.1.</span> <span class="toc-text">欧拉函数基础推导</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E5%B8%B8%E8%A7%81%E6%80%A7%E8%B4%A8"><span class="toc-number">2.2.</span> <span class="toc-text">欧拉函数常见性质</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E5%BA%94%E7%94%A8%EF%BC%9A%E6%8F%AD%E7%A4%BA%E5%89%8D%E8%B7%AF%E7%9A%84%E8%A8%80%E7%81%B5"><span class="toc-number">3.</span> <span class="toc-text">概念应用：揭示前路的言灵</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97"><span class="toc-number">3.1.</span> <span class="toc-text">欧拉函数计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E5%8F%8D%E6%BC%94"><span class="toc-number">3.2.</span> <span class="toc-text">欧拉函数反演</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E7%90%86%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%87%9D%E7%9C%B8%E6%AF%81%E7%81%AD%E7%9A%84%E7%9E%AC%E9%97%B4"><span class="toc-number">4.</span> <span class="toc-text">定理基础：凝眸毁灭的瞬间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E7%90%86%E6%8B%93%E5%B1%95%EF%BC%9A%E5%8A%AB%E4%BD%99%E9%87%8D%E7%94%9F%E7%9A%84%E5%B8%8C%E6%9C%9B"><span class="toc-number">5.</span> <span class="toc-text">定理拓展：劫余重生的希望</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E6%88%98%EF%BC%9A%E6%8B%93%E5%AE%87%E8%A1%8C%E5%A4%A9%E7%9A%84%E6%84%8F%E5%BF%97"><span class="toc-number">6.</span> <span class="toc-text">算法实战：拓宇行天的意志</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/33291/" title="【奇技淫巧】欧拉函数与欧拉定理"><img src="https://image.jiuci.top/i/2025/03/08/nu4tvj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【奇技淫巧】欧拉函数与欧拉定理"/></a><div class="content"><a class="title" href="/posts/33291/" title="【奇技淫巧】欧拉函数与欧拉定理">【奇技淫巧】欧拉函数与欧拉定理</a><time datetime="2025-03-08T06:36:56.000Z" title="发表于 2025-03-08 14:36:56">2025-03-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/52315/" title="【算法介绍】排列组合问题汇总"><img src="https://image.jiuci.top/i/2025/03/02/yx12en.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【算法介绍】排列组合问题汇总"/></a><div class="content"><a class="title" href="/posts/52315/" title="【算法介绍】排列组合问题汇总">【算法介绍】排列组合问题汇总</a><time datetime="2025-03-03T10:07:30.000Z" title="发表于 2025-03-03 18:07:30">2025-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/64292/" title="【算法介绍】中国剩余定理及其拓展"><img src="https://image.jiuci.top/i/2025/02/26/umsvkr.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【算法介绍】中国剩余定理及其拓展"/></a><div class="content"><a class="title" href="/posts/64292/" title="【算法介绍】中国剩余定理及其拓展">【算法介绍】中国剩余定理及其拓展</a><time datetime="2025-02-26T09:52:04.000Z" title="发表于 2025-02-26 17:52:04">2025-02-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/57614/" title="517九段第三课 A ：整数分块 again">517九段第三课 A ：整数分块 again</a><time datetime="2025-02-24T12:22:59.000Z" title="发表于 2025-02-24 20:22:59">2025-02-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/57613/" title="517九段第一课 E ：求和">517九段第一课 E ：求和</a><time datetime="2025-02-23T10:56:01.000Z" title="发表于 2025-02-23 18:56:01">2025-02-23</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://act-webstatic.mihoyo.com/upload/contentweb/hk4e/34ec75c9ed70f793cdd698ad1a4764e5_731983624099835302.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By 仙蕊缀锦</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a><span class="footer-separator">|</span><span>萌ICP备 </span><a target="_blank" rel="noopener" href="https://icp.gov.moe/?keyword=20250528">20250528号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://npm.elemecdn.com/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://npm.elemecdn.com/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+
+  const initWaline = (Fn) => {
+    const waline = Fn(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.517Group.cn/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, {"requiredMeta":["mail"],"locale":{"placeholder":"昵称和邮箱为必填项，为了您能及时收到相关回复的邮件通知，请确保邮箱的正确性！"}}))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+  }
+
+  const loadWaline = async () => {
+    if (initFn) initWaline(initFn)
+    else {
+      await getCSS('https://npm.elemecdn.com/@waline/client/dist/waline.css')
+      const { init } = await import('https://npm.elemecdn.com/@waline/client/dist/waline.js')
+      initFn = init || Waline.init
+      initWaline(initFn)
+      window.walineFn = initFn
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/517题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 zMrの517题解 (29)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/HDU题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🤯 zMrのHDU题解 (12)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/POJ题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🤕 zMrのPOJ题解 (8)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/USACO题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🐮 zMrの奶牛题解 (9)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/hexo/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">😎 zMrの博客搭建 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/写作/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 zMrの转载短文 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/洛谷题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🤒 zMrの你谷题解 (38)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/算法笔记/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">💡 zMrの编程学习 (66)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/CF题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🥳 zMrのCF题解 (14)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/とある/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🪙 zMrの超电磁炮 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/花雨/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🌸 花雨の短篇小说 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/技巧/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🤪 zMrの奇技淫巧 (7)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><a class="magnet_link_more"  href="https://blog.517Group.cn/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(33.333333333333336% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #b30070}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/18203/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-11-27</span><a class="blog-slider__title" href="posts/18203/" alt="">Hello everyone</a><div class="blog-slider__text">大家好！</div><a class="blog-slider__button" href="posts/18203/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/55084/" alt=""><img width="48" height="48" src="/img/high_pos.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-12-06</span><a class="blog-slider__title" href="posts/55084/" alt="">高精度算法</a><div class="blog-slider__text">庞大的数字，从更加庞大的视角来看呢？—— 高精度</div><a class="blog-slider__button" href="posts/55084/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/61237/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-12-14</span><a class="blog-slider__title" href="posts/61237/" alt="">排序算法</a><div class="blog-slider__text">嘿，我给一你个排序尝尝！</div><a class="blog-slider__button" href="posts/61237/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/11529/" alt=""><img width="48" height="48" src="/img/Platinum_20231219.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-12-19</span><a class="blog-slider__title" href="posts/11529/" alt="">【转】破碎的白金色爱恋</a><div class="blog-slider__text">无法挽回</div><a class="blog-slider__button" href="posts/11529/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/20319/" alt=""><img width="48" height="48" src="/img/BluePoison_20240202.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-12-22</span><a class="blog-slider__title" href="posts/20319/" alt="">【转】堕落的天蓝色天使</a><div class="blog-slider__text">蓝毒与源石虫</div><a class="blog-slider__button" href="posts/20319/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/12268/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-02-08</span><a class="blog-slider__title" href="posts/12268/" alt="">517编程7段第五课T2</a><div class="blog-slider__text">关于最长上升子序列……</div><a class="blog-slider__button" href="posts/12268/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/48555/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-02-08</span><a class="blog-slider__title" href="posts/48555/" alt="">线段树</a><div class="blog-slider__text">一棵有用的大树</div><a class="blog-slider__button" href="posts/48555/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/16219/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-17</span><a class="blog-slider__title" href="posts/16219/" alt="">浅析Tarjan算法</a><div class="blog-slider__text">割边？割点？点双？边双？</div><a class="blog-slider__button" href="posts/16219/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/20300/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-04-15</span><a class="blog-slider__title" href="posts/20300/" alt="">枚举算法</a><div class="blog-slider__text">暴力出奇迹！</div><a class="blog-slider__button" href="posts/20300/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/51855/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-04-20</span><a class="blog-slider__title" href="posts/51855/" alt="">贪心算法</a><div class="blog-slider__text">money，money，moneymoneymoney！</div><a class="blog-slider__button" href="posts/51855/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/4632/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-05-19</span><a class="blog-slider__title" href="posts/4632/" alt="">二分图</a><div class="blog-slider__text">二分？图！</div><a class="blog-slider__button" href="posts/4632/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/38675/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-05-22</span><a class="blog-slider__title" href="posts/38675/" alt="">STL：Map，Set（Multiset &amp; Bitset）</a><div class="blog-slider__text">好用喵！</div><a class="blog-slider__button" href="posts/38675/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/3037/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gwngoe.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-05</span><a class="blog-slider__title" href="posts/3037/" alt="">树状数组，这一篇就够了！</a><div class="blog-slider__text">一棵简单的小树</div><a class="blog-slider__button" href="posts/3037/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/3381/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gxdq6g.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-07</span><a class="blog-slider__title" href="posts/3381/" alt="">倍增算法</a><div class="blog-slider__text">1，2，4，8……</div><a class="blog-slider__button" href="posts/3381/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/54370/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h3wbfz.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-08</span><a class="blog-slider__title" href="posts/54370/" alt="">三分法</a><div class="blog-slider__text">二分？还是……三分！</div><a class="blog-slider__button" href="posts/54370/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/16895/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h6a5xz.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-09</span><a class="blog-slider__title" href="posts/16895/" alt="">01分数规划</a><div class="blog-slider__text">有点难评</div><a class="blog-slider__button" href="posts/16895/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/27720/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/grebh9.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-24</span><a class="blog-slider__title" href="posts/27720/" alt="">树的直径</a><div class="blog-slider__text">这是一棵树，但你可以把它拉长</div><a class="blog-slider__button" href="posts/27720/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/61809/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/greigw.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-24</span><a class="blog-slider__title" href="posts/61809/" alt="">并查集</a><div class="blog-slider__text">前面是一篇茂密的森林！</div><a class="blog-slider__button" href="posts/61809/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/20180/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gwnsv7.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-24</span><a class="blog-slider__title" href="posts/20180/" alt="">树的重心</a><div class="blog-slider__text">原来，你也有重心</div><a class="blog-slider__button" href="posts/20180/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/9711/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h69xej.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-01</span><a class="blog-slider__title" href="posts/9711/" alt="">01背包</a><div class="blog-slider__text">贫穷的背包</div><a class="blog-slider__button" href="posts/9711/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/15524/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/greilk.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-03</span><a class="blog-slider__title" href="posts/15524/" alt="">完全背包</a><div class="blog-slider__text">土豪的背包</div><a class="blog-slider__button" href="posts/15524/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/30148/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h2njhh.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-04</span><a class="blog-slider__title" href="posts/30148/" alt="">多重背包</a><div class="blog-slider__text">合理的背包</div><a class="blog-slider__button" href="posts/30148/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/55387/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/greqqx.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-06</span><a class="blog-slider__title" href="posts/55387/" alt="">状压DP</a><div class="blog-slider__text">这不是饼干，这是压缩状态！</div><a class="blog-slider__button" href="posts/55387/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/8498/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gz61ww.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-07</span><a class="blog-slider__title" href="posts/8498/" alt="">单调队列</a><div class="blog-slider__text">这是一个为了维护单调性而弹出元素的队列……</div><a class="blog-slider__button" href="posts/8498/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/33564/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gz65al.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-08</span><a class="blog-slider__title" href="posts/33564/" alt="">单调栈</a><div class="blog-slider__text">这是单调队列的一个好朋友——单调栈</div><a class="blog-slider__button" href="posts/33564/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/35125/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h1zgqq.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-21</span><a class="blog-slider__title" href="posts/35125/" alt="">【算法介绍】动态规划</a><div class="blog-slider__text">振袖秋风问红叶</div><a class="blog-slider__button" href="posts/35125/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/5784/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gxe0b8.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-24</span><a class="blog-slider__title" href="posts/5784/" alt="">【算法介绍】连通分量</a><div class="blog-slider__text">我们终将重逢</div><a class="blog-slider__button" href="posts/5784/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/27694/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gz6iip.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-25</span><a class="blog-slider__title" href="posts/27694/" alt="">【算法介绍】素数筛法</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="posts/27694/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/63427/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h0zatm.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-25</span><a class="blog-slider__title" href="posts/63427/" alt="">【算法介绍】欧几里得算法</a><div class="blog-slider__text">影照浮世风流</div><a class="blog-slider__button" href="posts/63427/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/26645/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gz65mu.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-28</span><a class="blog-slider__title" href="posts/26645/" alt="">【算法介绍】数位DP</a><div class="blog-slider__text">出发！火之国</div><a class="blog-slider__button" href="posts/26645/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/30757/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h3wos1.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-29</span><a class="blog-slider__title" href="posts/30757/" alt="">【算法介绍】二分图相关算法</a><div class="blog-slider__text">我的名字是阿斯托洛吉斯·莫娜·梅姬斯图斯，意为「伟大的占星术士莫娜」。 如果想找我占卜，记住我的名字是最基本的尊重…而且要一次性全念对！</div><a class="blog-slider__button" href="posts/30757/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/47065/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h18ikp.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-30</span><a class="blog-slider__title" href="posts/47065/" alt="">【算法介绍】轮廓线DP</a><div class="blog-slider__text">蒙德城的迪卢克，应约而来。闲聊恕不奉陪，如果你是想做一番大事，我倒有点兴致。</div><a class="blog-slider__button" href="posts/47065/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/30892/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gxdn8b.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-31</span><a class="blog-slider__title" href="posts/30892/" alt="">【算法介绍】字符串算法</a><div class="blog-slider__text">初次见面，我是瑶瑶，忝列门墙，师从歌尘浪市真君。出门在外，若有不便…请叫上我！瑶瑶有礼了。</div><a class="blog-slider__button" href="posts/30892/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/41953/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gyaouh.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-04</span><a class="blog-slider__title" href="posts/41953/" alt="">【算法介绍】区间类动态规划</a><div class="blog-slider__text">这就是你的冒险团吗？真好啊…又热闹，又有人情味。啊，我是「班尼冒险团」的团长班尼特！能把我列入你们的合作伙伴吗？拜托了！</div><a class="blog-slider__button" href="posts/41953/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/32907/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gxdwsz.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-06</span><a class="blog-slider__title" href="posts/32907/" alt="">【算法介绍】树形动态规划</a><div class="blog-slider__text">我是诺艾尔，西风骑士团的女仆，从今天起会陪你一起去冒险。如果遇到任何困扰或者麻烦，不用担心，我都会尽全力帮你解决的。嗯，现在就可以哦。</div><a class="blog-slider__button" href="posts/32907/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/9654/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h2njx2.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-10</span><a class="blog-slider__title" href="posts/9654/" alt="">【算法介绍】单调队列优化动态规划</a><div class="blog-slider__text">我是七七，是个僵尸…啊，还要说什么来着。</div><a class="blog-slider__button" href="posts/9654/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/23117/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gybeqa.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-14</span><a class="blog-slider__title" href="posts/23117/" alt="">【算法介绍】斜率优化优化动态规划</a><div class="blog-slider__text">「猫尾酒馆」的招牌调酒师，迪奥娜，我的出场费可是很贵的。唔？你居然…不是为了酒才来的？哼，那你的邀请…我就勉为其难地接受了。</div><a class="blog-slider__button" href="posts/23117/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/35875/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h2n46n.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-23</span><a class="blog-slider__title" href="posts/35875/" alt="">【算法介绍】Boruvka 算法</a><div class="blog-slider__text">我的名字是九条裟罗，你记不住也无妨，只需知道：我将永远护卫稻妻、践行鸣神的意志，不论神鬼，遇敌必除！呼…别紧张，既然答应与你并肩，我自当尽心尽职。大义外的事情，我不会计较的。</div><a class="blog-slider__button" href="posts/35875/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/37502/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h0zro1.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-27</span><a class="blog-slider__title" href="posts/37502/" alt="">【算法介绍】拉格朗日插值法</a><div class="blog-slider__text">初次见面，异乡的旅人，你的名字我可是早就听说了。只要你不嫌弃，我托马，从今天起就是你的朋友了。</div><a class="blog-slider__button" href="posts/37502/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/62555/" alt=""><img width="48" height="48" src="https://ooo.0x0.ooo/2024/09/29/O4Vt2b.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-29</span><a class="blog-slider__title" href="posts/62555/" alt="">【算法介绍】高斯消元</a><div class="blog-slider__text">「马力卜」的基尼奇，初次见面，告知委托内容时请附上你的出价。</div><a class="blog-slider__button" href="posts/62555/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/14895/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/grecsz.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-10-04</span><a class="blog-slider__title" href="posts/14895/" alt="">【算法介绍】点分治算法</a><div class="blog-slider__text">「终末番」早柚，参上。 呼——如果没有什么事情的话，我先去睡觉了。对了，不准趁我睡觉的时候偷偷摸我的头。</div><a class="blog-slider__button" href="posts/14895/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/15452/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h1z97o.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-10-27</span><a class="blog-slider__title" href="posts/15452/" alt="">【算法介绍】分块思想</a><div class="blog-slider__text">这是当年教令院的杰出学者奖，这是须弥解谜协会终身成就奖，还有遗迹机关研讨会的…如何，可有志愿拜入我门下？</div><a class="blog-slider__button" href="posts/15452/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/8691/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h05spl.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-10-30</span><a class="blog-slider__title" href="posts/8691/" alt="">【算法介绍】基础莫队</a><div class="blog-slider__text">你好呀，远道而来的旅行者，夜晚的沙漠可是很严酷的，不如就在敝处稍住一晚吧，由我来照看你的无梦之夜。</div><a class="blog-slider__button" href="posts/8691/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/29018/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h1zn35.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-02</span><a class="blog-slider__title" href="posts/29018/" alt="">【算法介绍】启发式合并</a><div class="blog-slider__text">哎呀呀，这不是大名鼎鼎的旅行者吗？我是旅行商人多莉·桑歌玛哈巴依。作为给你的见面礼，我这儿的商品全部限时九折优惠，赶快来挑选吧，我帮你打包~</div><a class="blog-slider__button" href="posts/29018/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/10295/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h05xji.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-04</span><a class="blog-slider__title" href="posts/10295/" alt="">【算法介绍】树上莫队</a><div class="blog-slider__text">在下行秋，不过书海一蠹。某虽不才，仍愿为君略尽绵薄。难得有机会说这种风格的台词，感觉还不错。</div><a class="blog-slider__button" href="posts/10295/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/55621/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h05cla.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-06</span><a class="blog-slider__title" href="posts/55621/" alt="">【算法介绍】矩阵乘法</a><div class="blog-slider__text">我叫千织，「千织屋」的老板。有服装定制类需求的话，欢迎找我。其他需求，就看你有没有足够用来交换的东西了，有来有回才叫「生意」嘛。</div><a class="blog-slider__button" href="posts/55621/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/1858/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h0zlo7.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-07</span><a class="blog-slider__title" href="posts/1858/" alt="">【算法介绍】KMP算法</a><div class="blog-slider__text">见习巡林员柯莱，前来报到！我会保障你在林间出行时的安全——呼，总算能说出这句出场词了，我没念错字吧…</div><a class="blog-slider__button" href="posts/1858/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/9677/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h05kae.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-11</span><a class="blog-slider__title" href="posts/9677/" alt="">【算法介绍】线段树合并</a><div class="blog-slider__text">我是七星之「天权」，凝光。要做个交易吗？你来做我的贴身侍卫，而我，会教导你在璃月出人头地的技巧。</div><a class="blog-slider__button" href="posts/9677/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/25415/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gz5ye0.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-12</span><a class="blog-slider__title" href="posts/25415/" alt="">【算法介绍】最小生成树</a><div class="blog-slider__text">你好，我是荒泷派的二把手久岐忍。我们承包多种业务，货运物流、安保维持、房屋补漏、表演驻唱等等。需要我们请随时联系，这是我的名片，还请收下。</div><a class="blog-slider__button" href="posts/25415/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/49075/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gyb3t0.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-15</span><a class="blog-slider__title" href="posts/49075/" alt="">【算法介绍】最短路算法</a><div class="blog-slider__text">你好呀，我是「回声之子」的卡齐娜。喜欢吃颗粒果，想要变强，不擅长打架。啊…不是说这些的时候？那、那…请问你接下来想去哪里走走？我挺熟悉这一带的，就让我来带路吧。</div><a class="blog-slider__button" href="posts/49075/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/43633/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gwna5g.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-17</span><a class="blog-slider__title" href="posts/43633/" alt="">【算法介绍】Tarjan 求强连通分量</a><div class="blog-slider__text">我只是每天都做同样的事，和真正的骑士比起来还差远了…但这是通往骑士之路的修行，修行可不能只是嘴上说说而已啊。</div><a class="blog-slider__button" href="posts/43633/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/44810/" alt=""><img width="48" height="48" src="https://cdn.luogu.com.cn/upload/image_hosting/wcudkkfq.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-19</span><a class="blog-slider__title" href="posts/44810/" alt="">【算法介绍】Tarjan 求双连通分量</a><div class="blog-slider__text">我名重云，家族久居璃月，世代以驱邪除魔为业。今日萍水相逢，看来我与阁下有些缘分。唔…不收钱的，不收钱！</div><a class="blog-slider__button" href="posts/44810/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/59654/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h2n5qu.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-27</span><a class="blog-slider__title" href="posts/59654/" alt="">【算法介绍】笛卡尔树</a><div class="blog-slider__text">你好，我是来自「烟谜主」的欧洛伦。我不是卖菜的，但是可以送你一些。</div><a class="blog-slider__button" href="posts/59654/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/38118/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gwncqs.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-04</span><a class="blog-slider__title" href="posts/38118/" alt="">【奇技淫巧】特殊思维题的复杂度分析</a><div class="blog-slider__text">我是砂糖，炼金术的…研究员。听说你去过很多地方，一定也…不，没什么，第一次见面，不该这么麻烦你。但…如果你愿意，和我讲讲路上有意思的事，那个…我，会很开心的。</div><a class="blog-slider__button" href="posts/38118/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/43244/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gybah5.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-08</span><a class="blog-slider__title" href="posts/43244/" alt="">【算法介绍】树链剖分</a><div class="blog-slider__text">是我哟，全提瓦特最棒的大魔术师——林尼。惊喜吗？意外吗？想知道我是怎么出现在你面前的吗？嗯——你那双像黄宝石一般晶莹剔透的眼睛，让我很中意哦！让我再为你表演一次吧。看好了哦，这回，千万不要眨眼。</div><a class="blog-slider__button" href="posts/43244/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/3880/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h6a1wi.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-10</span><a class="blog-slider__title" href="posts/3880/" alt="">【算法介绍】二维数点</a><div class="blog-slider__text">侦察骑士安柏，前来报到！今后有什么需要帮忙的，尽管说好啦！</div><a class="blog-slider__button" href="posts/3880/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/24357/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gyay8f.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-11</span><a class="blog-slider__title" href="posts/24357/" alt="">【算法介绍】扫描线思想</a><div class="blog-slider__text">“明日复明日，明日何其多” —— 总之，快快行动起来吧！</div><a class="blog-slider__button" href="posts/24357/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/8615/" alt=""><img width="48" height="48" src="https://ooo.0x0.ooo/2024/12/18/OEqWtY.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-17</span><a class="blog-slider__title" href="posts/8615/" alt="">【基础语法】第一篇之 “读入输出”</a><div class="blog-slider__text">潜伏的陷阱</div><a class="blog-slider__button" href="posts/8615/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/32689/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h2nf78.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-18</span><a class="blog-slider__title" href="posts/32689/" alt="">【算法介绍】基环树</a><div class="blog-slider__text">我是枫丹特巡队队长夏沃蕾，寒暄就免了，有什么棘手的案件需要处理吗？</div><a class="blog-slider__button" href="posts/32689/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/8903/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h05d9w.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-20</span><a class="blog-slider__title" href="posts/8903/" alt="">Math Combinatorial Counting [I]</a><div class="blog-slider__text">First course of Combinatorial Counting, we will discuss the definition of Combinatorial and some common proposition.</div><a class="blog-slider__button" href="posts/8903/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/10762/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h3wjk1.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-27</span><a class="blog-slider__title" href="posts/10762/" alt="">【算法简介】递归与回溯</a><div class="blog-slider__text">初次见面，我是林尼的魔术助手，工作事宜请咨询林尼。观看演出请咨询售票处。找我？…请长话短说。</div><a class="blog-slider__button" href="posts/10762/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/6026/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h1z73s.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-28</span><a class="blog-slider__title" href="posts/6026/" alt="">【算法介绍】曼哈顿与切比雪夫距离</a><div class="blog-slider__text">我是来自璃月的厨师香菱，最擅长的是做各种捞…捞，料理…哎呀，练了那么多次，还是会紧张，嘿。</div><a class="blog-slider__button" href="posts/6026/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/23111/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h1zwco.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-29</span><a class="blog-slider__title" href="posts/23111/" alt="">【算法介绍】拓展KMP（Z函数）</a><div class="blog-slider__text">我即断罪之皇女，真名为菲谢尔。应命运的召唤降临在此间——哎？你也是，异世界的旅人吗…？那好吧，本皇女恩许你同行。</div><a class="blog-slider__button" href="posts/23111/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/60004/" alt=""><img width="48" height="48" src="https://cdn.luogu.com.cn/upload/image_hosting/b2xexyal.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-30</span><a class="blog-slider__title" href="posts/60004/" alt="">【算法介绍】Manacher 算法</a><div class="blog-slider__text">我是北斗，听过我的「南十字」船队吗？如果你也喜欢冒险，那就跟着我吧。我罩你。</div><a class="blog-slider__button" href="posts/60004/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/2024to2025/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h3we3z.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-31</span><a class="blog-slider__title" href="posts/2024to2025/" alt="">【年度总结】回首与展望</a><div class="blog-slider__text">哎哎哎，又到海灯节了嘛？</div><a class="blog-slider__button" href="posts/2024to2025/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/35771/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/05/n84wbs.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-05</span><a class="blog-slider__title" href="posts/35771/" alt="">【算法介绍】字典树算法</a><div class="blog-slider__text">从世界之外漂流而来的旅行者，被神带走血亲，自此踏上寻找七神之路。 ——「我们不会孤军奋战」</div><a class="blog-slider__button" href="posts/35771/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/33267/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/10/xb83u9.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-10</span><a class="blog-slider__title" href="posts/33267/" alt="">【奇技淫巧】环形动态规划设计</a><div class="blog-slider__text">我叫烟绯，是璃月港最顶尖的律法专家，没有之一！商业纠纷、民事调解、刑事诉讼，样样精通，一出手就搞得定！</div><a class="blog-slider__button" href="posts/33267/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/47641/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/18/p8u6sr.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-18</span><a class="blog-slider__title" href="posts/47641/" alt="">【算法介绍】后缀数组</a><div class="blog-slider__text">能像这样见面是件好事，眼光相近的人才能共同开启一段愉快的对话。初次见面，你好，我是建筑设计师卡维，有什么事需要我帮忙的话，请先详细说明你的需求。</div><a class="blog-slider__button" href="posts/47641/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/12436/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/19/vr8ikf.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-19</span><a class="blog-slider__title" href="posts/12436/" alt="">【算法介绍】可持久化相关数据结构</a><div class="blog-slider__text">芭芭拉，闪耀登场~治疗就交给我吧，不会让你失望的！</div><a class="blog-slider__button" href="posts/12436/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/46066/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/23/nmaeqe.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-23</span><a class="blog-slider__title" href="posts/46066/" alt="">【算法介绍】快速傅里叶变换</a><div class="blog-slider__text">熟悉的恶魔总比不熟悉的好</div><a class="blog-slider__button" href="posts/46066/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/52802/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/02/13/gyjep7.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-02-04</span><a class="blog-slider__title" href="posts/52802/" alt="">【算法介绍】原根与离散对数</a><div class="blog-slider__text">就以奇珍万千，给各位鼓劲了……百事贞吉，一心同归~</div><a class="blog-slider__button" href="posts/52802/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/39663/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/02/12/weeu1o.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-02-10</span><a class="blog-slider__title" href="posts/39663/" alt="">【算法介绍】杜教筛和 Min_25 筛</a><div class="blog-slider__text">你可能还不明白，人类从不掩饰掌握星空的欲望，当然，也包括我在内</div><a class="blog-slider__button" href="posts/39663/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/21601/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/02/16/u012a8.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-02-16</span><a class="blog-slider__title" href="posts/21601/" alt="">【算法介绍】网络流相关</a><div class="blog-slider__text">让我摸个「鱼」吧！拜托拜托拜托…哎呀，这不就…和了！</div><a class="blog-slider__button" href="posts/21601/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/64292/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/02/26/umsvkr.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-02-26</span><a class="blog-slider__title" href="posts/64292/" alt="">【算法介绍】中国剩余定理及其拓展</a><div class="blog-slider__text">生死虚实，一念之间。洞天幻化，长梦一觉……破！</div><a class="blog-slider__button" href="posts/64292/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/52315/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/03/02/yx12en.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-03-03</span><a class="blog-slider__title" href="posts/52315/" alt="">【算法介绍】排列组合问题汇总</a><div class="blog-slider__text">为了去往远方……不管什么手段，通通拿出来吧！</div><a class="blog-slider__button" href="posts/52315/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/33291/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/03/08/nu4tvj.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-03-08</span><a class="blog-slider__title" href="posts/33291/" alt="">【奇技淫巧】欧拉函数与欧拉定理</a><div class="blog-slider__text">欧拉？有点意思哈……</div><a class="blog-slider__button" href="posts/33291/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>
