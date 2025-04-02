@@ -1,0 +1,866 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【算法介绍】概率与期望及其计算 | 祝馀宫</title><meta name="author" content="仙蕊缀锦"><meta name="copyright" content="仙蕊缀锦"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="好奇心，可是很危险的~谜题千千万万，但谜底却是…乌有之物。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【算法介绍】概率与期望及其计算">
+<meta property="og:url" content="https://blog.517group.cn/posts/3961/index.html">
+<meta property="og:site_name" content="祝馀宫">
+<meta property="og:description" content="好奇心，可是很危险的~谜题千千万万，但谜底却是…乌有之物。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.jiuci.top/i/2025/03/16/njv326.png">
+<meta property="article:published_time" content="2025-03-16T06:29:08.000Z">
+<meta property="article:modified_time" content="2025-04-02T08:48:19.242Z">
+<meta property="article:author" content="仙蕊缀锦">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="算法笔记">
+<meta property="article:tag" content="概率期望">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.jiuci.top/i/2025/03/16/njv326.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.517group.cn/posts/3961/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":0,"languages":{"author":"作者: 仙蕊缀锦","link":"链接: ","source":"来源: 祝馀宫","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【算法介绍】概率与期望及其计算',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-04-02 16:48:19'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css" /><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/side.css"><script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "pckc81gi6y");</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/ChioriAvatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">225</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/hitokoto/"><i class="fa-fw fas fa-commenting"></i><span> 一言</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://image.jiuci.top/i/2025/03/16/njv326.png')"><nav id="nav"><span id="blog-info"><a href="/" title="祝馀宫"><img class="site-icon" src="/img/logo.svg#%20image"/><span class="site-name">祝馀宫</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/hitokoto/"><i class="fa-fw fas fa-commenting"></i><span> 一言</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【算法介绍】概率与期望及其计算</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-16T06:29:08.000Z" title="发表于 2025-03-16 14:29:08">2025-03-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-02T08:48:19.242Z" title="更新于 2025-04-02 16:48:19">2025-04-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【算法介绍】概率与期望及其计算"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="文章总览：群星岸落之夜"><a href="#文章总览：群星岸落之夜" class="headerlink" title="文章总览：群星岸落之夜"></a>文章总览：群星岸落之夜</h1><p>如你所见，这篇文章的主题是概率与期望。众所周知，概率与期望早就占领了各大领域，比如说投篮的命中率可以表达一个选手的投篮水准，竞赛题目设置很多测试点来测试代码本质是一种抽样调查，等等等等。但是说概率与期望，在初中或者高中课本中都是占比非常大的部分<del>（刚刚好我也打算顺手学了）</del>，所以这篇文章的前半部分注重于一些课本上的基础知识介绍与讲解，后面会浅浅的说一些信竞方面的概率期望。</p>
+<p>下为本文大纲：</p>
+<ol>
+<li><a href="#概念基础：穿过锁孔之风">概率基本知识介绍及计算</a></li>
+<li><a href="#概念基础：穿过锁孔之风">全概率公式与贝叶斯公式</a></li>
+<li><a href="#概念进阶：进入盛夏之门">期望、方差与线性相关性</a></li>
+<li><a href="#概念进阶：进入盛夏之门">二项、超几何及正态分布</a></li>
+<li><a href="#基础例题：第十六把钥匙">期望线性性以及简单运用</a></li>
+<li><a href="#进阶例题：苦药似的真理">随机游走的问题概率模型</a></li>
+</ol>
+<h1 id="概念基础：穿过锁孔之风"><a href="#概念基础：穿过锁孔之风" class="headerlink" title="概念基础：穿过锁孔之风"></a>概念基础：穿过锁孔之风</h1><ul>
+<li><a href="#概率定义：这是魔法哟">样本空间与概率定义</a></li>
+<li><a href="#简单计算：你开窍了吗">古典概型与概率加乘</a></li>
+<li><a href="#条件概率：打开的格局">独立事件与条件概率</a></li>
+<li><a href="#特殊公式：看看好看的">全概率与贝叶斯公式</a></li>
+</ul>
+<h2 id="概率定义：这是魔法哟"><a href="#概率定义：这是魔法哟" class="headerlink" title="概率定义：这是魔法哟"></a>概率定义：这是魔法哟</h2><p>关于概率的定义，你可能会说：“这玩意不是烂大街了嘛吗？还有人不会的？”正确的，概率的定义其实大家都知道是那个意思，可是实际上从稍微严谨的角度出发的概念以及一些性质可能并不广为人知，我们要学概率，就要从最基础概念开始：概率的基础——事件。</p>
+<p>对于一个事件，可以是世间万物，比如说下面几个都可以是事件：</p>
+<ol>
+<li>在一个既有青蛙又有兔子的娃娃机抓娃娃，抓出了一只青蛙<strong>（概率事件）</strong></li>
+<li>太阳从西边升起<strong>（不可能事件）</strong></li>
+<li>在一个既有青蛙又有兔子的娃娃机抓娃娃，抓出了一只兔子<strong>（概率事件）</strong></li>
+<li>从高楼跳下会摔亖<strong>（必然事件）</strong></li>
+</ol>
+<p>我们可以探讨一下事件之间的关系：</p>
+<p>在上面所说的抓娃娃事件中，我们知道了娃娃机里既有青蛙又有兔子，那么抓出一只青蛙是有可能的，抓出一只兔子也是有可能的，问题并没有说明有没有除了青蛙与兔子以外的动物，如果有的话，那么这两个事件就是<strong>互斥的</strong>事件，即为“不可能同时发生”。</p>
+<p>但是说，如果这个娃娃机是只有青蛙和兔子的，那么这时候我们抓出来的娃娃一定不是青蛙就是兔子，显然的这两个事件也是不可能同时发生，但是除了这两种事件不会有别的了，这时候它就是一个特殊的互斥关系，被称为<strong>对立</strong>。</p>
+<p><img src="https://image.jiuci.top/i/2025/03/18/zgjh8i.png" alt="互斥与对立"></p>
+<p>那么除了这两种事件关系，实际上还有一个，那就是<strong>独立</strong>。与上面两个关系不同，这两个关系都是不可以同时发生的，那么相对的，可以同时发生的事件关系，就是独立事件。比如说下面两个事件：</p>
+<ol>
+<li>投骰子，投出六</li>
+<li>陨石撞地球</li>
+</ol>
+<p>这两个事件显然是可以同时发生的，这就是一组<strong>独立事件</strong>，文氏图应该就不用我画了罢（doge</p>
+<hr class="hr-double-arrow">
+
+
+<p>那么上面介绍了事件的定义和它们之间的简单关系，那么概率是什么呢？关于概率我们需要先教科书式的介绍一下下面这些概念：</p>
+<ul>
+<li><strong>样本点：</strong>一种结果，我们抽出样本中的一个，代表整体可能性的一种结果，记作 $\omega$ 。</li>
+<li><strong>样本空间：</strong>所有样本点的集合，记作 $\Omega$ 。</li>
+<li><strong>事件：</strong>样本空间的子集，若干结果的集合，用表示集合的方式来表示即可。</li>
+</ul>
+<p>我们举一个简单的例子，对于一次全班的考试中，要考虑考试的结果，对于 $x\in[0,100]\cap\mathbb Z$，“考试得了 $x$ 分”就是一个样本点，记作 $\omega_x$。那么所有 $\omega_x$ 的集合就是样本空间，显然的一共有 $101$ 个样本在里面。对于事件“考试及格”所对应的集合就应该是 $A=\{\omega_x\mid 60\le x\le 100\}$。</p>
+<p>那么说完了这些，概率到底是什么呢？</p>
+<p>本质上来讲，概率是一个从事件对应到一个实数的函数 $P$。在有限样本空间中，每一个样本点被赋予了一个概率 $P(\omega)$，而构成事件 $E$ 的所有 $P(\omega)$ 之和即为这个事件的发生概率，通常来讲，概率有如下性质：</p>
+<ol>
+<li><strong>非负性：</strong>对于任意事件 $A$ 都有 $P(A)\ge0$；</li>
+<li><strong>正规性：</strong>$P(\Omega)=1$</li>
+<li><strong>可加性：</strong>如果事件 $A_1,A_2,\dots,A_k$ 两两互斥，那么 $P(\cup A_i)=\sum P(A_i)$，其实刚刚说的构成事件 $E$ 的 $P(\omega)$ 之和就是这个性质的一个表现。</li>
+</ol>
+<p>那么这是概率的一些性质，概率的实际意义是什么呢？这是一个至今具有争议的问题，主要有两个主流的关于概率实际意义的观点：</p>
+<ul>
+<li><strong>频率学派：</strong>认为概率是相对频数的极限，是一种客观属性。这其实是大多数人一开始接触概率时的看法。这一说法适用于可以反复观测的事件，随着观测次数趋于无穷，事件发生的相对频数会越来越趋近于真正的概率。</li>
+<li><strong>贝叶斯学派：</strong>认为概率描述的是信心的程度，带有一些主观的成分。比如，可以说“明天下雨的概率是 $90\%$”，但显然我们无法多次观测这一事件。这里的 $90\%$ 代表我们对于“明天下雨”这一事件的信心，将来如果我们得到的新的数据（比如云层的变化)，我们可能会对这一信心进行修正。</li>
+</ul>
+<p>这两个东西了解即可，没啥太大用处，接下来看如何计算简单的概率。</p>
+<h2 id="简单计算：你开窍了吗"><a href="#简单计算：你开窍了吗" class="headerlink" title="简单计算：你开窍了吗"></a>简单计算：你开窍了吗</h2><p>在最最开始学习概率的时候，我们可以举一个例子：投骰子投出偶数的概率是多少？显然的，在一个骰子上，偶数有 $2,4,6$ 三种，一共有六面，概率就是 $3/6$ 即 $1/2$。</p>
+<p>这种目标情况数量和总情况数量的比值，就是概率最基本的计算公式，被称为<strong>古典概型</strong>。</p>
+<script type="math/tex; mode=display">
+P(A)=\frac{n(A)}{n(\Omega)}</script><p>那么不难看出，古典概型的本质其实就是<strong>计数问题</strong>，而我们学过的最最基本的计算方案数量的方式，无非就是<strong>暴力枚举</strong>和<strong>排列组合</strong>，接下来看两个例题：</p>
+<blockquote>
+<p><strong>友情链接：</strong></p>
+<p><a href="https://blog.517group.cn/posts/52315/">【算法介绍】排列组合问题汇总 | 祝馀宫</a></p>
+</blockquote>
+<p><strong>例题一：</strong>在写有 $1\sim 6$ 的卡牌中不放回卡牌地连抽两张卡片，抽到两张卡牌的和是 $4$ 的倍数的的概率是多少呢？</p>
+<p>这道题就是一个经典的暴力枚举+排列组合的题目，首先总方案数很显然是 $C_6^2$，然后来看有多少种可能抽出的两张卡牌之和是四的倍数的，由于不分先后顺序，可以列出下表：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">+</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>1</strong></td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>2</strong></td>
+<td style="text-align:center">3</td>
+<td style="text-align:center"><strong>4</strong></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>3</strong></td>
+<td style="text-align:center"><strong>4</strong></td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>4</strong></td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center"><strong>8</strong></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>5</strong></td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center"><strong>8</strong></td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>6</strong></td>
+<td style="text-align:center">7</td>
+<td style="text-align:center"><strong>8</strong></td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center"><strong>12</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>加粗的数即为四的倍数的方案，数一数，一共有六种。由刚刚的古典概型公式可以得到答案：</p>
+<script type="math/tex; mode=display">
+P(A)=\frac{n(A)}{n(\Omega)}=\frac{6}{C_6^2}=\frac{6}{6\times 5\div 2}=\frac{6}{15}=\frac{2}{5}</script><p>很简单，好的看下一题：</p>
+<p><strong>例题二：</strong>花博会有 $A,B,C,D$ 四个展馆，甲乙两人每人选择 $2$ 个参观，在他们选择的展馆恰好有一个相同的概率是多少呢？</p>
+<p>那么这道题应该有一个大的考虑方向，总情况数是显然的，$(C_4^2)^2$ 意为两个人各选两个，而且最终顺序显然是不用被考虑的。目标情况数的话我们由于<strong>恰好</strong>有一个相同，所以说我们可以优先选出这个相同的，剩下两个不能相同，对应的表示方法就应该是 $C_4^1\times C_3^1\times C_2^1$，搞定。</p>
+<p>不过另外的，由于选出来了一个目标以后，两人只能在剩下的三个选出不同的，并且由于两个人是有差异的，所以是要考虑顺序的。综合来讲，方案数也可以是 $C_4^1\times A_3^2$ 。</p>
+<p>但是不管怎么说，最终的答案一定是固定的：</p>
+<script type="math/tex; mode=display">
+P(A)=\frac{n(A)}{n(\Omega)}=\frac{C_4^1\times C_3^1\times C_2^1}{C_4^2\times C_4^2}=\frac{24}{36}=\frac{2}{3}</script><p>这就是古典概型，简单事件的概率计算，但是通常来讲题目里不止是简单事件，更多的是复杂事件，我们来看看接下来如何计算复杂事件的概率——加法与乘法原理。</p>
+<hr class="hr-double-arrow">
+
+
+
+<p>加法与乘法原理其实是排列组合里面的一种概念，大致含义就是<strong>分类用加法、分步用乘法</strong>。那么在概率中，这个规律也还是适用的，我们可以简单的看一道例题来理解一下。</p>
+<p><strong>例题三：</strong>发电报，发送 $0$ 时有 $\alpha$ 的概率收到 $1$，$(1-\alpha)$ 的概率收到 $0$；在发送 $1$ 时有 $\beta$ 的概率收到 $0$，$(1-\beta)$ 的概率收到 $1$ 。发送信息的时候要把某一个信息连发三遍，每一次发送信息都是独立的，收到的信息中出现次数多的就是译码，现在问发送 $1$ 时，有多少概率接受到的也是 $1$ ？（其中 $0\lt\alpha,\beta\lt1$ 即概率合法且均为概率事件）</p>
+<p>我们可以轻松的写出下面这样的分类讨论：</p>
+<ul>
+<li><strong>发送三个一，接收三个一：</strong>显然的，由于每次发送信息独立，概率为 $(1-\beta)^3$。</li>
+<li><strong>发送三个一，接受两个一：</strong>接收两个一的概率是 $(1-\beta)^2$，接收一个零的概率是 $\beta$，一共有三种排列方式，全部乘起来就是答案，$3(1-\beta)^2\beta$ 就是这个情况的概率。</li>
+<li><strong>显然剩下的没有可能了</strong>。</li>
+</ul>
+<p>那么这两个情况都是符合条件的，概率相加即可，最终答案应该是：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(A)
+&=P(A_1)+P(A_2)\\
+&=(1-\beta)^3+3(1-\beta)^2\beta\\
+&=(1-\beta)^2(1+2\beta)
+\end{aligned}</script><p>这里就体现了分类相加分步相乘的思想，分类讨论出来的每个结果相加，分讨内部的各种情况都是乘起来算，这就是所谓的加法与乘法原理。</p>
+<p>但是说这里我们不得不提出一个问题：对于任意事件 $A,B$，始终满足 $P(AB)=P(A)P(B)$ 吗？也就是：对于任意两个事件同时发生的概率始终等于两个事件单独发生的概率的乘积吗？（这里 $P(AB)$ 是 $P(A\cap B)$ 的简写）</p>
+<p>事实上并不是。这个命题满足的前提条件是事件 $A,B$ 互斥，这也不难理解。如果两个事件存在交集的话，这就意味着这个事件在触发的同时也有可能会触发另一个事件，这显然概率就被我们重复算了。</p>
+<p>那么这时候，我们又该如何计算这类的概率呢？欢迎来到下一幕——条件概率。</p>
+<h2 id="条件概率：打开的格局"><a href="#条件概率：打开的格局" class="headerlink" title="条件概率：打开的格局"></a>条件概率：打开的格局</h2><p>为了解决一个事件不互斥时候的概率计算，我们不得不引入条件概率。关于条件概率的定义，大概是我们用符号 $P(B\mid A)$ 表示：在 $A$ 发生的前提下，$B$ 有多少可能发生，计算方法也简单易懂，看看下面的图就知道了：</p>
+<p><img src="https://image.jiuci.top/i/2025/03/20/ze7t2y.png" alt="非互斥事件条件概率图解" style="zoom:50%;" /></p>
+<p>因为前提条件是 $A$ 发生，所以说我们只需要在事件 $A$ 的这个蓝色圆内考虑问题，而在蓝色圆圈内 $B$ 发生的概率是显然的，即：</p>
+<script type="math/tex; mode=display">
+P(B\mid A)=\frac{P(AB)}{P(A)}</script><p>所以说依照定义，上面那一个命题的正确形式应该是 $P(AB)=P(A)P(B\mid A)$，这是条件概率的基本定义，接下来可以简单的看一些题目感受一下。</p>
+<p><strong>例题四：</strong>一共有 $52$ 张扑克牌，没有大小王，无放回地连抽两次，两次都抽到 $A$ 的概率有多少？如果第一次抽到 $A$ 的前提下，第二次抽到 $A$ 的概率是多少？</p>
+<p>显然的这道题可以不用条件概率，不过配合一下，现在正在讲条件概率如何解题。首先来看第一个问题，两次抽到 $A$ 的概率有多少？这个问题直接上古典概型，不难得到答案应该是：</p>
+<script type="math/tex; mode=display">
+\frac{C_4^2}{C_{52}^2}=\frac{4\times 3}{52\times 51}=\frac{1}{221}</script><p>第二小问明显是一个条件概率，如果我们设事件 $A$ 是第一次抽出 $A$，事件 $B$ 是第二次抽出 $A$，那么显然在条件概率中的分母就是 $P(A\cap B)$ 也就是两次都抽出 $A$ 的概率，这个已经在第一问求出来了，剩下的第一次抽出 $A$ 的概率是非常好求的，所以最终答案应该是：</p>
+<script type="math/tex; mode=display">
+P(B\mid A)=\frac{P(AB)}{P(A)}=\frac{\frac{1}{221}}{\frac{4}{52}}=\frac{1}{17}</script><p><del>感觉很简单，再来一个</del></p>
+<p><strong>例题五：</strong>某班同学有 $60\%$ 的同学玩原神，$50\%$ 的同学玩崩铁，$70\%$ 的同学玩原神或崩铁，那么在这个班级里玩崩铁的同学里随机抽一个，则这个同学也玩原神的概率是多少？</p>
+<p>这个题目有点文字把戏，这里“玩原神或崩铁”的意思应该是“玩原神和玩崩铁”的人之和，那么动用小学数学知识我们就能画出下面这样的韦恩图：</p>
+<p><img src="https://image.jiuci.top/i/2025/03/23/h25lxp.png" alt="题目大意"></p>
+<p>这个甚至一眼丁真就可以做：</p>
+<script type="math/tex; mode=display">
+P(G\mid S)=\frac{P(GS)}{P(S)}=\frac{40\%}{50\%}=80\%</script><p>这样就可以算是解锁了概率的基础计算方法了，接下来我们来看进阶的两个公式。</p>
+<h2 id="特殊公式：看看好看的"><a href="#特殊公式：看看好看的" class="headerlink" title="特殊公式：看看好看的"></a>特殊公式：看看好看的</h2><p>首先第一个公式，<strong>全概率公式</strong>。这个公式的思想就是<strong>分类+分步</strong>，把一个难以计算的事件分为几个小事件，逐个击破，最终得到答案，所以说它表现出来应该是：</p>
+<script type="math/tex; mode=display">
+\boxed{
+\begin{array}{c|c}
+\, P(B)
+\begin{cases}
+A_1 \Longrightarrow B\\
+A_2\Longrightarrow B\\
+A_3\Longrightarrow B\\
+\vdots\qquad\quad\ \ \vdots \\
+A_n\Longrightarrow B\\
+\end{cases}\quad
+&
+\;
+\begin{aligned}
+P(B)=\sum_{i=1}^nP(A_i)P(B\mid A_i)
+\end{aligned}
+\end{array}\,
+}</script><p>直接干巴巴的看可能看不出什么，我们来见几个直观的例子。</p>
+<p><strong>例题六：</strong>某同学在一次考试中，$8$ 道单选题中有 $6$ 道有思路，$2$ 道没思路，有思路的有 $90\%$ 的可能性能做对，没思路的有 $25\%$ 的可能性做对，则他在 $8$ 道题中随意选择一道题，做对的概率是多少呢？</p>
+<p>很容易注意到的就是每一道题分成了有思路和没思路两部分，这样就导致整个事件的概率变得难以计算。这时候就只需要拿出我们最最最最最原始的方法，树形图。由于属性图的优秀性质，我们做概率题的时候特别喜欢用它来表示事件与事件之间的关系。</p>
+<p><img src="https://image.jiuci.top/i/2025/03/23/lluhkm.png" alt="题目示意" style="zoom:50%;" /></p>
+<p>在所有问题中，显然的随机抽一道抽出有思路的问题和没思路的问题分别是 $75\%$ 和 $25\%$，在有思路的情况下，做对这道题目的概率是 $90\%$，根据上面的分步相乘思想，这一分支做对的概率是 $75\%\times90\%$。对应的，在没有思路的情况下，作对题目的概率只有 $25\%$，整个分支的概率应该是 $25\%\times25\%$。最有依据分类相加的思想，总共作对的概率就是 $73.75\%$ 即 $59/80$。</p>
+<p>这就是全概率公式思想的一个体现，把问题拆分后，分步相乘分类相加。</p>
+<hr class="hr-double-arrow">
+
+
+
+<p>第二个概率公式是贝叶斯公式，贝叶斯公式主要是针对条件概率的，并且其计算过程也天生包含全概率公式，还是老规矩，先放公式：</p>
+<script type="math/tex; mode=display">
+P(A_i\mid B)=\frac{P(A_iB)}{P(B)}=\frac{P(B\mid A_i)P(A_i)}{\sum\limits_{k=1}^nP(A_k)P(B\mid A_k)}</script><p>乍一看比刚刚更加玄学了，不过仔细观察一下，分子是我们之前说过的条件概率计算两个事件同时发生的概率，而分母是刚刚学过的全概率公式，这个方法在题目中的具体表现，可以简单的看一看：</p>
+<p><strong>例题七：</strong>旅行者打算凹两层深渊，第一层旅行者满星的概率为 $0.6$，但由于旅行者好胜心过强，第二层的满星概率会受第一层表现的影响，若其第一层满星，则第二层满星的概率依然为 $0.6$，但旅行者一旦被击败，其下一层的满星概率迅速降为 $0.1$。 小美第二层深渊获得满星的概率是多少？已知小美第二层满星，则其第一层未满星的概率是多少？</p>
+<p>第一问很简单，直接上全概率公式可以得到答案是 $0.6\times0.6+0.4\times0.1=0.4$。</p>
+<p>第二问就要用到贝叶斯公式了，分母已经得到，分子我们就要明确一点，事件 $A$ 和 $B$ 到底都是谁。显然的根据题目我们知道 $A$ 应该是第一层未满星的概率，$B$ 是第二层满星的概率，当他们俩同时发生的时候，显然的就对应了概率 $0.4\times0.1=0.04$，那么最终的答案就很显然了：</p>
+<script type="math/tex; mode=display">
+P(A\mid B)=\frac{P(AB)}{P(B)}=\frac{0.04}{0.4}=\frac{1}{10}</script><p>这就是贝叶斯公式和全概率公式的解释，事实上这两个计算公式的思想都是类似的，主要靠大家理解概率问题的本质。</p>
+<h1 id="概念进阶：进入盛夏之门"><a href="#概念进阶：进入盛夏之门" class="headerlink" title="概念进阶：进入盛夏之门"></a>概念进阶：进入盛夏之门</h1><ul>
+<li><a href="#期望概念：冷漠的诚实">期望的定义与计算</a></li>
+<li><a href="#方差概念：饥饿的地景">方差的定义与计算</a></li>
+<li><a href="#线性相关：视界外来信">线性相关性的计算</a></li>
+<li><a href="#分布其一：伯努利实验">二项分布基础定义</a></li>
+<li><a href="#分布其二：解读与灵感">超几何分布的例题</a></li>
+<li><a href="#分布其三：早说是魔法">正态分布简单例题</a></li>
+</ul>
+<p><em>Warning：以下部分除了期望概念其他的都针对于高中数学</em>☠️</p>
+<h2 id="期望概念：冷漠的诚实"><a href="#期望概念：冷漠的诚实" class="headerlink" title="期望概念：冷漠的诚实"></a>期望概念：冷漠的诚实</h2><p>关于期望的概念，我们首先要了解的是分布列的概念。首先分布列就是一个随机变量所对应的概率，所谓随机变量，可以认为是一个样本空间所包含的样本点，每一个样本点所出现的不同概率就是它所对的概率。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">X</th>
+<th style="text-align:center">$x_1$</th>
+<th style="text-align:center">$x_2$</th>
+<th style="text-align:center">$\cdots$</th>
+<th style="text-align:center">$x_i$</th>
+<th style="text-align:center">$\cdots$</th>
+<th style="text-align:center">$x_n$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>P</strong></td>
+<td style="text-align:center">$p_1$</td>
+<td style="text-align:center">$p_2$</td>
+<td style="text-align:center">$\cdots$</td>
+<td style="text-align:center">$p_i$</td>
+<td style="text-align:center">$\cdots$</td>
+<td style="text-align:center">$x_n$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>而期望就可以理解为这个随机变量在概率意义下的平均值，不过说这个平均值并不是我们所说的那种加起来还要除以个数的平均值，由于我们要算在概率意义下的平均值，对于整个样本空间来说，概率总和应该是只有 $1$ 的，所以最后我们要除以的量应该是 $1$。</p>
+<script type="math/tex; mode=display">
+E(X)=\sum_{i=1}^np_ix_i</script><p>这就是期望的计算公式，一般来讲常规的编程题目考的都是期望。</p>
+<p>我们也可以举一个简单的例子来看一下期望的计算：</p>
+<p><strong>例题八：</strong>抽卡，出金有 $1.6\%$ 的概率，会带来 $8$ 的高兴值；出紫有 $13\%$ 的概率，会带来 $4$ 的高兴值；剩下的保底出蓝，会带来 $1$ 的高兴值。问一次单抽期望给我们带来多少高兴值？</p>
+<p>明显的期望题，答案是：</p>
+<script type="math/tex; mode=display">
+E=8\times1.6\%+4\times13\%+1\times85.4\%=1.502</script><p><em><del>太简单了</del></em></p>
+<h2 id="方差概念：饥饿的地景"><a href="#方差概念：饥饿的地景" class="headerlink" title="方差概念：饥饿的地景"></a>方差概念：饥饿的地景</h2><p>方差的话就是更加少见的东西，一般来讲只会在数学大题里面出现，竞赛不会说，不过我也浅浅的介绍一下。方差也是一个基于分布列的概念，大概来讲的话，是数值<strong>偏离平方期望值</strong>。这里涉及到三个重点：<strong>偏离、平方、期望</strong>，这与方差的计算公式有莫大的联系，我们首先来看方差的计算公式：</p>
+<script type="math/tex; mode=display">
+D(X)=\sum_{i=1}^n(x_i-E(X))^2p_i</script><p>这个公式非常好的体现了刚刚的点，<strong>偏离</strong>对应的就是被平方的数，这是方差的本质。<strong>平方</strong>顾名思义就是这个公式中的平方运算，这个运算的性质可以给我们的优点有很多：</p>
+<ol>
+<li><strong>正确性：</strong>显然的，如果存在了负数的偏离量，这时候求和就会导致抵消了其他人的偏移量，与正经的期望值就没什么区别了。</li>
+<li><strong>可辨性：</strong>相对于绝对值运算，平方运算能更加放大偏移量，让我们直观的注意到高偏移度所对应。</li>
+</ol>
+<p>第三点<strong>期望</strong>，这个很直观，每一个偏移平方的期望值，我们把偏移平方看作一个整体的话，确实就和期望的计算公式体现出了极高的相似性，也能很好的平均便宜平方，这就是方差。</p>
+<p>虽然但是，房产查的计算公式非常繁杂，但是我们还有另外一个公式，显得会比较好记：</p>
+<script type="math/tex; mode=display">
+D(X)=E(X^2)-E(X)^2</script><p>也没什么好说的，这玩意是真正的没有考频，一点没有，记住几个公式即可。</p>
+<h2 id="线性相关：视界外来信"><a href="#线性相关：视界外来信" class="headerlink" title="线性相关：视界外来信"></a>线性相关：视界外来信</h2><p>接下来的概念是线性相关，线性相关也可以算作一个分布列上的概念，或者说更广泛的，线性相关可以适用于一些数列的函数关系。不过说这个函数关系是平均的，或者说是<strong>拟合的</strong>，即这个函数并不是数据严格以这个拟合的直线分布，而是会存在分布在这个直线周围的情况。</p>
+<p>对此为了判定数据线性相关性的强弱，我们要引入<strong>线性相关系数</strong>的概念，首先是计算公式：</p>
+<script type="math/tex; mode=display">
+r=\frac{\sum\limits_{i=1}^n\big(x_i-\bar x\big)\big(y_i-\bar y\big)}{\sqrt{\sum\limits_{i=1}^{n}\big(x_i-\bar x\big)^2}\sqrt{\sum\limits_{i=1}^{n}\big(y_i-\bar y\big)^2}}=\frac{\sum\limits_{i=1}^n x_iy_i-n\bar x\bar y}{\sqrt{\sum\limits_{i=1}^n{x_i}^2-n\bar x^2}\sqrt{\sum\limits_{i=1}^n{y_i}^2-n\bar y^2}}</script><p>对于这个系数的取值范围，其实是在 $[-1,1]$ 的区间内的。其中 $|r|\rightarrow 0$，就表示这组数据的线性相关性极弱；相对的如果 $|r|\rightarrow 1$，就说明这组数据的线性相关性强，其中， $1$ 表示正相关性，$-1$ 表示负相关性。一般来说，线性相关系数的绝对值在 $0.75$ 及以上的，我们都可以说是线性相关性强的数据。</p>
+<p>我们来解析一下这个式子的组成部分：</p>
+<p>分子的组成部分是所有 $x$ 和平均 $x$ 值的差乘以所有 $y$ 和平均 $y$ 值之差的乘积，我们可以对于一些线性型函数做一个小对比。众所周知线性函数也就是一次函数（当然常数函数也是，不过常数函数是一个常数比较特殊，这里不对它进行分类考虑）</p>
+<ol>
+<li><strong>正相关性：</strong>即 $x$ 增加时 $y$ 也增加。可以看一下，如果 $x&lt;\bar x$ 且 $y&lt;\bar y\ $那么最终的两个差都应该是负的，最后乘起来就是正的。相反如果都大于平均值，显然乘积也都是正的。</li>
+<li><strong>负相关性：</strong>这是与刚刚正相关性相反的，推理过程没有差异，自行理解一下。</li>
+</ol>
+<p>最后求和就表示了相关性的整体综合，理论上如果线性相关性非常强的话，比如说是严格正相关性，那么每一项的乘积都应该是正的，最终的家和就是一个累积了所有正数的一个极限值。相反的如果中间有一个数违背了这个相关性，可能就会导致造成的贡献比期望值小，或者直接变成负的，这样就会导致相关系数的绝对值变小。</p>
+<p>但是我们还有一个疑问，在一个一次函数上真的能取到 $\pm 1$ 的极限值吗？我们简单证明一下：</p>
+<p>设一次函数 $y=kx+b$ 中且 $k\neq 0$，我们在公式中代入一次函数的解析式。</p>
+<script type="math/tex; mode=display">
+\sum\limits_{i=1}^n\big(x_i-\bar x\big)\big(y_i-\bar y\big)=\sum\limits_{i=1}^n\big(x_i-\bar x\big)\big(kx_i+b-k\bar x-b\big)=k\sum\limits_{i=1}^n\big(x_i-\bar x\big)^2</script><p>分母也可以算：</p>
+<script type="math/tex; mode=display">
+\sum\limits_{i=1}^{n}\big(y_i-\bar y\big)^2=\sum\limits_{i=1}^{n}\big(kx_i+b-k\bar x-b\big)^2=k^2\sum\limits_{i=1}^n\big(x_i-\bar x\big)^2</script><p>然后把这些式子全都代入到公式里：</p>
+<script type="math/tex; mode=display">
+r=\frac{k\sum\limits_{i=1}^n\big(x_i-\bar x\big)^2}{\sqrt{\sum\limits_{i=1}^{n}\big(x_i-\bar x\big)^2}\sqrt{k^2\sum\limits_{i=1}^n\big(x_i-\bar x\big)^2}}=\frac{k}{|k|}</script><p>所以说再一次函数中显然的 $r$ 可以取到 $\pm 1$ 的极值，这也是为什么 $k$ 不能等于 $0$ 的原因。</p>
+<hr class="hr-double-arrow">
+
+
+
+<p>但是注意到关于线性相关系数我还给出了另外一个公式，那么如何理解这个公式呢？</p>
+<script type="math/tex; mode=display">
+r=\frac{\sum\limits_{i=1}^n x_iy_i-n\bar x\bar y}{\sqrt{\sum\limits_{i=1}^n{x_i}^2-n\bar x^2}\sqrt{\sum\limits_{i=1}^n{y_i}^2-n\bar y^2}}</script><p>关于这个公式，我们可以先从刚刚的出发，看看能不能推出这个式子。这个式子在考题中的主要运用大概就是：考试的时候给了你一堆数据，然后给了你第一个式子，但是计算繁杂。然后给出的数据里面，有第二个式子的组成部分，你可以直接代入那些数据从而快速求解。所以说可以认为这个式子与第一个式子等价，我们要具备的是在考场上推出这个式子的能力。</p>
+<p>首先来看分子：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\sum_{i=1}^n(x_i-\bar x)(y_i-\bar y)\\
+=&\sum_{i=1}^n(x_i-x_i\bar y-\bar xy_i+\bar x\bar y)\\
+=&\left(\sum_{i=1}^nx_i\right)-\left(\bar y\sum_{i=1}^nx_i\right)-\left(\bar x\sum_{i=1}^ny_i\right)+n\bar x\bar y\\
+=&\left(\sum_{i=1}^nx_i\right)-\bar yn\bar x-\bar xn\bar y+n\bar x\bar y\\
+=&\sum_{i=1}^n x_i-n\bar x\bar y
+\end{aligned}</script><p>我觉得这个推导过程中除了要反复用到总和等于总量乘以平均值这一点以外，就是主意好每一个求和符号的范围就可以，其他的没有什么容易混淆的，接下来推分母：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\sum_{i=1}^n(x_i-\bar x)^2\\
+=&\sum_{i=1}^n({x_i}^2-2x_i\bar x+\bar x^2)\\
+=&\sum_{i=1}^n{x_i}^2-2\bar x(n\bar x)+n\bar x^2\\
+=&\sum_{i=1}^n{x_i}^2-n\bar x^2\\
+\end{aligned}</script><p>同理，$y$ 的那一项也是一样可以这样推出来的，也就是说我们可以轻松从原始公式中推导出这一个公式，完美！另外关于线性相关系数还有一个辨析点：若线性相关系数 $r=0$，则 $x,y$ 没有相关关系。这显然是错的，线性相关系数等于 $0$ 只能说明 $x,y$ 没有线性相关关系，不能说没有其他相关关系的。</p>
+<hr class="hr-double-arrow">
+
+
+
+<p>接下来是关于线性拟合的事情，我们知道了线性相关性肯定还不够，肯定会让你判断最终拟合出来的直线是什么。而拟合肯定是一个基于平均值的计算，所以我们想都不用想，拟合出来的直线一定经过点 $(\bar x,\bar y)$。接下来简单介绍一下如何计算拟合后直线的解析式。</p>
+<p>我们设拟合后的直线的解析式是 $\hat y=\hat kx+\hat b\ $，关于斜率 $\hat k$，我们有如下的计算公式：</p>
+<script type="math/tex; mode=display">
+\hat k=\frac{\sum\limits_{i=1}^n\big(x_i-\bar x\big)\big(y_i-\bar y\big)}{\sum\limits_{i=1}^n\big(x_i-\bar x\big)^2}=\frac{\sum\limits_{i=1}^nx_iy_i-n\bar x\bar y}{\sum\limits_{i=1}^n{x_i}^2-n\bar x^2}</script><p>这个公式的含义可以大致理解为，分子是自变量 $x$ 和因变量 $y$ 的变动，分母是单纯的自变量的变动，这个比率其实就是忽略掉截距以后斜率自己的定义。应该是说因为数据减去了平均值，那么对应被抹除的数据也有截距，所以说这个比率应该是等于最终拟合后直线的斜率的。<em><del>（以上是我纯纯乱编）</del></em></p>
+<p>那么已经知道了一次函数经过点和斜率，自然可以轻松的算出截距 $\hat b=\bar y-\hat k\bar x$，还有另外一个公式还是和上面一样的推导过程就可以得到的，这里不再赘述。</p>
+<p>这是拟合后的直线，那么我们肯定还要关心拟合的好不好，关于拟合后的直线好不好，我们当然也有自己的衡量数据和计算公式，主要呢是<strong>残差</strong>和<strong>决定系数</strong>。</p>
+<p>残差的这个概念比较好理解，对于单个点来讲，我们一定可以根据拟合出来的直线的公式算出它在直线上的点，而这个真实值和期望值之差，就是残差，写成式子大概就是：$y_i-\hat y_i$。</p>
+<p>但是说残差的缺点是很明显的，残差每个点都会有一个，不好汇总计算，而在之前的几个平均意义下的计算公式观察一下也能发现，大家很常规的一个操作是<strong>平方、求和、平均</strong>，把这几个思想集一身，就可以得到关于决定系数的计算公式：</p>
+<script type="math/tex; mode=display">
+R^2=1-\frac{\sum\limits_{i=1}^n\big(y_i-\hat y_i\big)^2}{\sum\limits_{i=1}^n\big(y_i-\bar y_i\big)^2}</script><p>为什么这里是 $R^2$ 呢？不知道，我感觉理论上来讲 $R^2$ 是不会是负值的，可能这样写单纯为了好看。决定系数是随拟合程度越好而增加的，因为显然如果拟合的好，残差平方和显然是会小于平均值差平方和的，这样就会导致减去的那个分数小，分数小了，整体就会变大，所以说这个决定系数越大，拟合效果越好。</p>
+<p>这样就差不多是拟合的全部内容了，接下来要带来的是一些常见的特殊分布，也是常用的三大分布：<strong>二项分布</strong>，<strong>超几何分布</strong>还有<strong>正态分布</strong>。</p>
+<h2 id="分布其一：伯努利实验"><a href="#分布其一：伯努利实验" class="headerlink" title="分布其一：伯努利实验"></a>分布其一：伯努利实验</h2><p>首先是最最简单最最经典的分布：二项分布。二项分布的精髓在于 $n$ 次独立重复实验即伯努利试验。我们可以从一个例题出发感受一下所谓伯努利试验。</p>
+<p><strong>例题九：</strong>九条裟罗射中目标的概率是 $0.9$，现在要连续射击 $8$ 次，每一次射击是相互独立的。现在问九条裟罗恰好击中目标三次的概率是多少？至少击中目标一次的概率是多少？最后一次射击才击中目标三次的概率是多少？</p>
+<p>首先来看第一问，其实这一个类似的问题已经在前面的例题出现过，就是<strong>相互独立</strong>这个关键字已经在前文提到过了，就是例题三。由于每一次行动是独立的，所以要单独计算概率，把它当成“分步相乘”计算即可。我们首先不考虑顺序，只需要射中三次，那么概率就是 $(0.9)^3(0.1)^5$，但显然这个问题是考虑顺序的，乘上不同顺序的数量后，就是最终的答案：$C_8^3(0.9)^3(0.1)^5$。</p>
+<p>第二问，至少几种目标一次，很显然的是我们如果要分别计算射中一次射中两次等等等等枚举过来计算的话，非常的困难，但是由于最终概率的总量是 $1$，我们只要减去不满足的即可，而显然不满足的是一次都没有射中，这种答案可以非常简单的被表示为 $1-(0.1)^8$。</p>
+<p>第三问，可以看为前 $7$ 次射击只射中 $2$ 次，最后一次射中的概率。答案是 $C_7^2(0.9)^3(0.1)^5$。</p>
+<p>我们可以从上面的这道例题了解出一个公式，在二项分布中，事件 $A$ 发生的概率为 $p$ 时，那么该事件在 $n$ 次中发生了 $k$ 次的概率就是 $C_n^kp^k(1-p)^{n-k}$，这是毋庸置疑的。</p>
+<p>那么在二项分布中，期望和方差会如何变化呢？这个应该是很好计算的，因为每一次事件相互独立，也就是说期望值就应该是试验次数和事件发生概率的乘积，即 $E(X)=nP(X)$；而关于方差呢我们也是一样的，可以先计算单次试验的方差，然后在计算总共的。单次方差其实就是套公式 $E(X^2)-E(X)^2=(1^2p+0^2p)-p^2=p(1-p)$。而还是因为每次试验重复且独立，所以在二项分布中方差可以表示为 $D(X)=np(1-p)$。</p>
+<p>现在都知道了每一个问题怎么算了以后，再来做几道简单题来见见世面：</p>
+<p><strong>例题十：</strong>岩王帝君在铸造摩拉的时候，由于劳累过度，掺进去了几个黄金，已知岩王帝君喜欢把摩拉一百枚一箱，每一箱都有一个黄金。现在他想要把这几个黄金找出来，但又不想吧刚刚铸好的摩拉全融了，于是他想出了两个办法。方法一：在 $10$ 箱中各抽取一枚；方法二：在 $5$ 箱中各抽取两枚。问这两种方法至少发现一枚黄金的概率分别是多少？</p>
+<p>我们来从方法一开始算。首先每一箱摩拉都应该是独立的，所以说这道题可以认为就是一个二项分布的问题。我们在上一题中学到了一个技巧，至少发现一枚黄金其实就是总量减去不发现黄金，所以可以算出来答案是 $1-(\frac{99}{100})^{10}$。</p>
+<p>关于第二问来说，和第一问应该是差不多的，我们只需要算出每一项抽不出黄金的概率即可。这显然是一个古典概型的问题，抽两枚的方法总共有 $C_{100}^2$ 种，但是能抽不出黄金的有 $C_{99}^2$ 种，然后我们除一下就能发现这里的概率是 $\frac{49}{50}$ ，总的答案就是 $1-(\frac{49}{50})^5$。</p>
+<p>然后我们来看一个贝叶斯公式和二项式分布结合的问题。</p>
+<p><strong>例题十一：</strong>甲乙两人正在举行比赛，采取五局三胜制（当一队赢得三场比赛时，该队获胜，比赛结束）更据以往的数据可以知道，甲获胜的概率是 $\frac{2}{3}$，比赛是不存在平局的，每场比赛都是相互独立的，那么在甲获胜的情况下，比赛一共进行了四轮的概率是多少？</p>
+<p>分类讨论。</p>
+<p>当比赛进行<strong>三场</strong>，甲获胜：显然的答案是 $(\frac 2 3)^3=\frac{8}{27}$。</p>
+<p>当比赛进行<strong>四场</strong>，甲获胜：因为甲要获胜，所以最后一场比赛必然是甲赢，前面的三场比赛乙只能赢一场，那么综合一下答案就是 $C_3^1\cdot\frac{1}{3}\cdot(\frac{2}{3})^3=\frac{8}{27}$。</p>
+<p>当比赛进行<strong>五场</strong>，甲获胜：和上面一个思路，$C_4^2\cdot(\frac{1}{3})^2\cdot(\frac{2}{3})^3=\frac{16}{81}$。</p>
+<p>然后我们根据贝叶斯公式可以算出答案就是：</p>
+<script type="math/tex; mode=display">
+P(B\mid A)=\frac{P(AB)}{P(A)}=\frac{\frac{8}{27}}{\frac{8}{27}+\frac{8}{27}+\frac{16}{81}}=\frac{3}{8}</script><p>那么这基本上就是二项分布的全部内容了，接下来是第二个分布：超几何分布！</p>
+<h2 id="分布其二：解读与灵感"><a href="#分布其二：解读与灵感" class="headerlink" title="分布其二：解读与灵感"></a>分布其二：解读与灵感</h2><p>同样的，从一道经典题目出发首先来认识一下超几何分布是什么。</p>
+<p><strong>例题十二：</strong>一个盒子里面有七个白球和三个黑球，现在从里面随机抽出三个，问抽出一个黑球和两个白球的概率是多少？</p>
+<p>首先问我们总共从十个球里面摸出三个，有 $C_{10}^3$ 种选法，另外抽出来的三个球中，一个来自于黑球，两个来自于白球的概率是 $C_{3}^1C_7^2$ 种可能，那么总共的来讲，这样的概率就是：</p>
+<script type="math/tex; mode=display">
+\frac{C_3^1C_7^2}{C_{10}^3}</script><p>这就是超几何分布的显著特征，物体分类，事实上要总结超几何分布的概率公式特别简单，我们假设一共有 $N$ 个物体，我们从中抽出 $n$ 个，并且其中某一类抽出 $k$ 个，且这一类有 $M$ 个物体，那么计算公式就是：</p>
+<script type="math/tex; mode=display">
+P(X=k)=\frac{C_{M}^kC_{N-M}^{n-k}}{C_N^n}</script><p>一样的，我们来了解一下超几何分布下的期望是什么。假设某一类有 $M$ 个物体，并总共有 $N$ 个物体的话，我们可以知道这一类会占总量一定的比率，而且这个比率就是我们第一次抽出它的概率，那么从期望的角度来说，如果我们在这个限定内一直抽，这个比率应该是固定的，这个就是我们学前班就听说过的<strong>大数定理</strong>，所以可以松动得到在超几何分布的意义下，期望可以表示为 $E(X)=\frac{M}{N}\times N$。</p>
+<p>可以看到超几何分布其实并没有什么难点，所以说如果考的话计算量和计算难度就会特别大。</p>
+<p><strong>例题十三：</strong>在一个盒子中有 $4$ 个红球，$m$ 个黄球，$n$ 个绿球。从中任意的抽取 $2$ 个球，抽出两个红球的概率是 $\frac{1}{6}$，抽出一个红球一个黄球的概率是 $\frac{1}{3}$，那么 $m-n$ 的值是多少？若设抽出红球 $\xi$ 个，那么 $E(\xi)$ 的值是多少？</p>
+<p>这就是一个属于计算偏难的超几何分布问题，因为我们面对了一个盒子并且里面有不容种类的球，所以第一眼都能看出是一个考超几何分布的问题，首先来看能不能计算出 $m-n$ 的值。</p>
+<p>可以注意到的是给出了两个具体的数据，所以我们的第一反应都应该是能不能列出关于那两个数据的方程：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\frac{C_4^2}{C_{n+m+4}^2}=\frac{1}{6}\\
+\frac{C_4^1C_m^1}{C_{n+m+4}^2}=\frac{1}{3}\\
+\end{cases}</script><p>要解出这个方程很简单，会注意到分母是一样的，所以让一式除以二式，这样把分母消掉以后就可以计算出 $m$ 的值，然后把 $m$ 的值代回任意一个方程里面，就可以解出 $n$ 的值，方程组的答案应该是 $m=3,n=2$。那么最终的答案即为 $m-n=1$。</p>
+<p>然后呢就是算出 $E(\xi)$，这个可以直接套用上面讲的公式，算出来答案 $\frac{8}{9}$。</p>
+<p>这道题的主要难点就是解出这个方程组<del>（绝对不是因为我算错了才说这道题难）</del></p>
+<h2 id="分布其三：早说是魔法"><a href="#分布其三：早说是魔法" class="headerlink" title="分布其三：早说是魔法"></a>分布其三：早说是魔法</h2><p>接下来的内容属于正态分布，正态分布应该是众多分布里面最有名的，我相信你肯定不止一次遇到过这样的图片：</p>
+<p><img src="https://image.jiuci.top/i/2025/03/29/p8oz5x.png" alt="正态分布" style="zoom: 50%;" /></p>
+<p>这样就是标准的正态分布了。所谓正态分布，其实就是中间多两头少，这个不难理解，生活中大多数情况都是这样的，比如说一个班里考 $100$ 分的肯定是比较少的，考 $0$ 分的也算比较少的，但大多数人肯定考的分数都是八九十分左右，这就是一种正态分布。</p>
+<p>可以看到我在这张正态分布的图片中写了两个红色的字母，分别标在最高点对应的横坐标值和它到源点的距离。其中前者其实就是这个正态分布的平均值，我们称之为 $\mu$，而 $\sigma$ 就是这个正态分布的标准差。</p>
+<p>我们如何理解这个正态分布呢？首先这个正态分布的面积我们是可以计算的，如果说横坐标当作一个随机变量的取值的话，那么纵坐标其实就是这个取值对应的概率，由于所有概率之和应当是 $1$，所以说正态分布围成的一个图形，它的总面积，应该是等于 $1$ 的。</p>
+<p>另外还有一个重点是关于不同正态分布平均值和方差大小的关系。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Normal_Distribution_PDF.svg/1200px-Normal_Distribution_PDF.svg.png" alt="正态分布曲线"></p>
+<p>首先平均值的差异是非常好判断的，我们肉眼就可以看出这个峰值所在的横坐标大致在哪里。但是值得辨析的是，方差和正态分布的高度的关系。不要说你看这个正态分布长这么高方差一定很大，但事实恰恰相反，中部越高的正态分布图形方差反而小，应该这样考虑：中间大说明落在中部的概率大，中部的数越多就说明只会有少量的数据离平均值特别远，方差就小了。</p>
+<p>除此之外，还有一个特殊的考点，正态分布不同位置面积的大小。</p>
+<p><img src="https://image.jiuci.top/i/2025/03/29/zg3e92.png" style="zoom:50%;" /></p>
+<p>其中从平均值到两边分割线的差距都是一个标准差。但是值得注意的是在现在的教材中好像把这些数给改了，上图的符号是有误的，这里用的应该是约等号，现在从上到下对应的值应该是：0.6827、0.9545、0.9973，不过考试的时候应该是会给这些值的（</p>
+<p>另外就是正态分布也是可以作为一个函数存在的，我们将其称为正态曲线，其解析式为：</p>
+<script type="math/tex; mode=display">
+f(x)=\frac{1}{\sqrt{2\pi}\sigma}\cdot e^{-\frac{(x-\mu)^2}{2\sigma^2}}</script><p>至此，所有高中部分的基础概率的概念都算是介绍的差不多了，接下来就是编程上的内容。</p>
+<h1 id="基础例题：第十六把钥匙"><a href="#基础例题：第十六把钥匙" class="headerlink" title="基础例题：第十六把钥匙"></a>基础例题：第十六把钥匙</h1><ul>
+<li><a href="#期望性质：期望线性性">期望的性质</a></li>
+<li><a href="#期望例题：得打开思路">期望的例题</a></li>
+</ul>
+<h2 id="期望性质：期望线性性"><a href="#期望性质：期望线性性" class="headerlink" title="期望性质：期望线性性"></a>期望性质：期望线性性</h2><p>我们在做概率的编程题中，无非就是两类，一类是算概率，一类是算期望。但是由于概率是个浮点数，容易爆炸，所以说题目一般都是让我们把概率取模，也就是算逆元；当然更多的应该是计算期望，这个灵活性更大；还有就是概率题非常的玄学，有一些题目甚至是诈骗，这就让我们不得不提高警惕（</p>
+<p>那么关于期望的例题，我们要用到的一个重要性质是期望线性性，可以表达为：</p>
+<script type="math/tex; mode=display">
+E(\alpha X_1+\beta X_2)=\alpha E(X_1)+\beta E(X_2)</script><p>这里的 $X_1,X_2$ 是随机变量，$\alpha,\beta$ 可以是任意系数，并且对于 $X_1,X_2$ 没有任何限制（即不论这两个随机变量有无依赖关系，都可以使用该式）期望线性性的作用主要是把看上去一坨乱七八糟的期望求和式化简为更加好计算的内容，下面我举几个例子来看一下。</p>
+<hr class="hr-double-arrow">
+
+
+
+<p><strong>例题十四：</strong>给出一个有 $6$ 个面的骰子（点数为 $1\sim 6$），掷骰子 $n$ 次，求所有期望总和。</p>
+<p>这一看就不能大力计算，这就需要用到期望线性性，设最终的总和为 $Y$，每次投出的数值是 $X_i$，那么显然的可以得知 $Y=\sum X_i$，那么我们可以直接套用期望线性性的式子变成求：</p>
+<script type="math/tex; mode=display">
+E(Y)=E\left(\sum X_i\right)=\sum E(X_i)</script><p>由于一眼就可以看出每一次投骰子是独立的，那么每一次的期望值都应该是一样的，那么总的期望值就可以认为是 $n$ 个$\ E(X_1)$ 相加即 $E(Y)=nE(X_1)$，这样就轻松的解决了一个看似非常难以计算的题目。</p>
+<p>这个模型其实在上面也可以当做是二项分布的例题，所以并没有特别体现出期望线性性的优点，接下来看一个不那么明显的期望问题。</p>
+<p><strong>例题十五：</strong>$n$ 人每人有一顶帽子。帽子被随机重新分配，获得原来帽子的期望人数是多少？</p>
+<p>最笨的做法：暴力枚举所有情况，然后计算。显然的一般来说这种做法是会超时的。</p>
+<p>那么如果是期望线性性来操作这道题目又该怎么办呢？我们还是设 $Y$ 是 $n$ 个人重新分配后，拿到自己帽子的人的数量，那么题目让我们求的就是 $E(Y)$ 的值。</p>
+<p>那么这道题我们如何设置自己的 $X_i$ 呢？因为 $Y$ 如果这样被设了人数，那么最直观的想法就是把 $X$ 也设为符合条件的人数。也就是说如果对于第 $i$ 人来说，如果他获得了自己的帽子，那么 $X_i$ 就是 $1$ 否则是 $0$。显然的如果我们这样定义，可以得到 $Y=\sum X$，$E(Y)=E(\sum X)$。</p>
+<p>依照期望线性性的式子，可得 $E(Y)=\sum E(X)$，这时候我们看可以来分析一下每一个 $X$ 的期望值是多少。那么最后就可以计算出总共的值。</p>
+<p>简单的计算一下，可以写出这样的式子：</p>
+<script type="math/tex; mode=display">
+E(X_i)=1\times P(X_i=1)+0\times P(X_i=0)</script><p>我们会注意到，理论上来说，在每一次分配中，$X_i$ 的值应该是互相依赖的。因为比如说在 $3$ 个人中，$1$ 号获得了 $2$ 号的帽子，那么 $2$ 号必然拿不到帽子。但是这时候重要的点就来了，我们 $X$ 的定义，是在一轮分配中能不能拿到自己的帽子。在最开始暴力做法中也提到了，分配总共的数量有 $n!$ 个。也就是说，这一个 $X_i$ 的期望值，就包括了所有分配方案的情况。也就是说分组方式是不一样的：我们举的例子中，是按照分配来分组计算；但是这个定义的实际含义，是根据人来分组计算。所以说不管怎么说，这个人拿到自己帽子的概率应该始终是 $1/n$。</p>
+<p>答案就一目了然了：$E(Y)=n\times(1/n)=1$。</p>
+<p>这是期望线性性最最最最最基本的应用，事实上编程的期望计算逃不出这么几个常见的模型，继续来看几个简单的题目示例。    </p>
+<h2 id="期望例题：得打开思路"><a href="#期望例题：得打开思路" class="headerlink" title="期望例题：得打开思路"></a>期望例题：得打开思路</h2><p>那么先来看一道简单的概率题罢。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2719">题目传送门</a></p>
+<p><strong>题目大意：</strong>随着世界杯小组赛的结束，法国，阿根廷等世界强队都纷纷被淘汰，让人心痛不已。 于是有人组织了一场搞笑世界杯，将这些被淘汰的强队重新组织起来和世界杯一同比赛。你和你的朋友欣然去购买球票。不过搞笑世界杯的球票出售方式也很特别，它们只准备了两种球票。</p>
+<ul>
+<li>A 类票——免费球票 </li>
+<li>B 类票——双倍价钱球票。</li>
+</ul>
+<p>购买时由工作人员通过掷硬币决定，投到正面的买 A 类票， 反面的买 B 类票。主办方总是准备了同样多的 A 类票和 B 类票。你和你的朋友十分幸运的排到了某场精彩比赛的最后两个位置。</p>
+<p>这时工作人员开始通过硬币售票。不过更为幸运的是当工作人员到你们面前时他发现已无需再掷硬币了，因为剩下的这两张票全是免费票。</p>
+<p>你和你的朋友在欣喜之余，想计算一下排在队尾的两个人同时拿到一种票的概率是多少(包括同时拿 A 类票或 B 类票) 假设工作人员准备了 $2n$ 张球票，其中 $n$ 张 A 类票，$n$ 张 B 类票，并且排在队伍中的人每人必须且只能买一张球票(不管掷到的是该买 A 还是该买 B)。</p>
+<p>对于所有 $n$ 满足 $n\le 1250$。</p>
+</blockquote>
+<p>这是一个经典的，简单的概率 DP，在上面讲了全概率公式和贝叶斯公式之后，我们就可以发现概率计算这一种天生的分类分布的过程，非常适合递推的结构，所以说概率题和期望题，大都是计数 DP 或者各种奇奇怪怪的 DP。</p>
+<p>来看看这道题目，$n$ 很小，可以直接考虑开二维数组。那么就建立状态 $dp[i][j]$ 表示售出 $i$ 张 A 票，$j$ 张 $B$ 票后两人买到票相同的概率。初始条件是显然的，如果出售的票是同一种票（当然前提是卖出出了至少有两张票）时候拿同样票的概率是 $100\%$，状态转移方程也是非常好理解的：</p>
+<script type="math/tex; mode=display">
+dp[i][j]=\frac{dp[i-1][j]+dp[i][j-1]}{2}</script><p>这是因为每次卖出一张票，只能是二选一，并且卖的票由抛硬币决定，所以说转移方程可以写成这样。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">double</span> dp[<span class="number">2010</span>][<span class="number">2010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n; n = n / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">0</span>][i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            dp[i][j] = (dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>]) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.4lf&quot;</span>, dp[n][n]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr class="hr-double-arrow">
+
+
+
+<p>继续，看一道期望题。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3802">题目传送门</a></p>
+<p><strong>题目大意：</strong>现在帕琪与强大的夜之女王，吸血鬼蕾咪相遇了，夜之女王蕾咪具有非常强大的生命力，普通的魔法难以造成效果，只有终极魔法：帕琪七重奏才能对蕾咪造成伤害。帕琪七重奏的触发条件是：连续施放的 $7$ 个魔法中，如果魔法的属性各不相同，就能触发一次帕琪七重奏。</p>
+<p>请注意，无论前 $6$ 个魔法是否已经参与施放终极魔法，只要连续 $7$ 个魔法的属性各不相同，就会再触发一次终极魔法。例如，如果用序号来代表一种魔法，魔法的施放序列为 $1, 2, 3, 4, 5, 6,7, 1$，则前 $7$ 个魔法会触发一次终极魔法，后 $7$ 个魔法会再触发一次终极魔法。</p>
+<p>现在帕琪有 $7$ 种属性的能量晶体，第 $i$ 种晶体可以施放出属性为 $i$ 的魔法，共有 $a_i$ 个。每次施放魔法时，会等概率随机消耗一个现有的能量晶体，然后释放一个对应属性的魔法。</p>
+<p>现在帕琪想知道，她触发帕琪七重奏的期望次数是多少，可是她并不会算，于是找到了学 OI 的你。</p>
+<p>数据范围约定：$\sum a_i\le 10^9$。</p>
+</blockquote>
+<p>这一个问题也是类似于期望线性性的问题，来看一看：我们同样的设 $Y$ 为释放七重奏的次数，$X_i$ 为第 $i$ 次是否释放七重奏，显然要求 $i\ge7$，问题就被转化为计算所有$\ E(X_i)$ 的和。</p>
+<p>首先来考虑$\ E(X_7)$ 即第七次释放七重奏的期望，显然的期望值就等于第七次释放七重奏的概率。如果设总共有 $N$ 个水晶的话（即 $N=\sum a_i$ ）那么第一次释放七重奏的概率应该是：</p>
+<script type="math/tex; mode=display">
+7!\times\frac{a_1}{N}\times\frac{a_2}{N-1}\times\frac{a_3}{N-2}\times\frac{a_4}{N-3}\times\frac{a_5}{N-4}\times\frac{a_6}{N-5}\times\frac{a_7}{N-6}</script><p>那么接下来来看看在第八次唱咒语释放七重奏的概率，其实就是在刚刚第七次唱咒语释放七重奏的基础上再使用任意一个晶片，我们会发现共同部分是第七次唱咒语触发七重奏的这个式子，提取公因式之后剩下的部分加起来：</p>
+<script type="math/tex; mode=display">
+\frac{a_1-1}{N-7}+\frac{a_2-1}{N-7}+\frac{a_3-1}{N-7}+\frac{a_4-1}{N-7}+\frac{a_5-1}{N-7}+\frac{a_6-1}{N-7}+\frac{a_7-1}{N-7}=1</script><p>乘了和乘了似的，所以直接忽略掉它，也就是说第八次唱咒语释放七重奏的概率和第七次一样！那么同理可得，每一次唱咒语结束以后释放七重奏的概率都是一样的（当然前提条件还是唱咒语次数大于等于 $7$，不然你连次数都不够）那么这一个总的答案就应该是：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E(Y)&=(N-6)\times E(X_1)\\
+&=7!\times\frac{a_1}{N}\times\frac{a_2}{N-1}\times\frac{a_3}{N-2}\times\frac{a_4}{N-3}\times\frac{a_5}{N-4}\times\frac{a_6}{N-5}\times a_7
+\end{aligned}</script><p>那么代码也就好写了（</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> N, a[<span class="number">10</span>];</span><br><span class="line"><span class="type">double</span> ans = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">7</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;a[i]);</span><br><span class="line">        N += a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(N &lt; <span class="number">7</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;0.000&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">7</span>; i++) &#123;</span><br><span class="line">	    ans = ans * a[i] / (N - i + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.3lf\n&quot;</span>, ans * <span class="number">1</span> * <span class="number">2</span> * <span class="number">3</span> * <span class="number">4</span> * <span class="number">5</span> * <span class="number">6</span> * <span class="number">7</span> * (N - <span class="number">6</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来看一个重要的模型：随机游走模型。</p>
+<h1 id="进阶例题：苦药似的真理"><a href="#进阶例题：苦药似的真理" class="headerlink" title="进阶例题：苦药似的真理"></a>进阶例题：苦药似的真理</h1><ul>
+<li><a href="#游走模型：空域的壁垒">随机游走模型例题</a></li>
+<li><a href="#模型例题：世界的大门">随机游走模型进阶</a></li>
+</ul>
+<h2 id="游走模型：空域的壁垒"><a href="#游走模型：空域的壁垒" class="headerlink" title="游走模型：空域的壁垒"></a>游走模型：空域的壁垒</h2><p><strong>例题十六</strong>：有 $n$ 种类型的优惠券，每次购买可以随机获得一张优惠券。期望购买多少次可以集齐所有类型的优惠券。</p>
+<p>这里就需要用到一个小结论：如果每次试验的成功概率为 $p$，那么成功的预期次数为 $1 / p$。</p>
+<blockquote>
+<p><strong>证明：</strong>如果每次试验的成功概率为 $p$，那么成功的预期次数为 $1 / p$。</p>
+<p>我们定义两个状态：$X_0,X_1$ 分别表示没成功与成功了，他们对应的期望值 $E(X_0),E(X_1)$ 表示这个状态转向试验成功的期望次数，那么可以写出下面的线性方程组。</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+E(X_1)=0\\
+E(X_0)=p(E(X_1)+1)+(1-p)(E(X_0)+1)
+\end{cases}</script><p>那么简单理解一下这个方程组的含义，就是试验一次，然后成功了与多试验一次没有成功，那么期望继续试验$\ E(X_0)$ 次成功，这样就是$\ E(X_0)$ 的定义，从不成功转向成功的期望试验次数。</p>
+<p>最终可以很轻松的解得 $E(X_0)=1/p$，证毕！</p>
+</blockquote>
+<p>有了这个小结论，我们可以简单的来看一下这道题是什么。</p>
+<p>同样的我们设 $Y$ 为现在有了 $n$ 种类型的优惠券的购买次数，$X_i$ 为有了 $i-1$ 种优惠券，然后获得下一种优惠券的购买次数。那么再次可以列出那熟悉的式子：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+Y &= X_1 + X_2 + \cdots + X_n\\
+E(Y) &= E(X_1) + E(X_2) + \cdots + E(X_n)
+\end{aligned}</script><p>接下来我们来简单的计算一下每一个 $E(X)$ 的值。</p>
+<ul>
+<li>$E(X_1) = 1$：因为当前一张优惠券都没有，拿哪一张都会多一种。</li>
+<li>$E(X_2)=n/(n-1)$：当前有了 $1$ 种，会有 $(n-1)/n$ 的概率获得新的一种，$1/n$ 的概率获得相同的，所以根据上面的结论可以知道期望次数为 $1/((n-1)/n)$，即 $n/(n-1)$。</li>
+<li>$E(X_3)=n/(n-2)$：同理。</li>
+</ul>
+<p>最终可以得到答案是：</p>
+<script type="math/tex; mode=display">
+E(Y) = \frac n n + \frac n {(n-1)} + \cdots + \frac n 2 + \frac n 1</script><p>学过小学的我们都知道，这是一个调和级数，所以说期望应该是买 $\log n$ 次。</p>
+<hr class="hr-double-arrow">
+
+
+
+<p>不过说这只是随机游走模型的一个式子意义下的理解，随机游走模型远比这玩意要逆天，我们拿一开始的那个小结论举例，可以画出下面这样的图来表示随机游走的过程：</p>
+<p><img src="https://image.jiuci.top/i/2025/04/02/qvkzs1.png" alt="随机游走图论模型"></p>
+<p>可以看出，随机游走可以抽象成一个图论问题，而且这个图论问题是可以写成方程组的形式的。还是以这个图为例，我们设定了两个状态以后，列出的方程组：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+E(X_1)=0\\
+E(X_0)=p(E(X_1)+1)+(1-p)(E(X_0)+1)
+\end{cases}</script><p>其实也是根据这张图可以理解的。这就为我们打开了一个新的思路，可以依据随机游走模型列出方程组，并且这个方程组一定是可解的，可以通过高斯消元的形式解出方程组的解，就是另外一种计算期望的形式。</p>
+<h2 id="模型例题：世界的大门"><a href="#模型例题：世界的大门" class="headerlink" title="模型例题：世界的大门"></a>模型例题：世界的大门</h2><p><del>虽然说各大网站和博文都说需要结合高斯消元优化，但我并没有找到</del></p>
+<p><del>刚说没找到就找到了</del>（ <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF24D">题目传送门</a></p>
+<blockquote>
+<p><strong>题目大意：</strong>$n$ 行 $m$ 列的矩阵，现在在 $(x,y)$，每次等概率向左，右，下走或原地不动，但不能走出去，问走到最后一行期望的步数。</p>
+<p>注意，$(1,1)$ 是木板的左上角，$(n,m)$ 是木板的右下角。$n,m\le 10^3$。</p>
+</blockquote>
+<p>题目的意思是非常好理解的，根据题目我们可以轻松的得到递推式：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+dp[i][j]=\frac 1 3(dp[i][j]+dp[i][j+1]+dp[i+1][j])+1, & j=1\\
+dp[i][j]=\frac 1 3(dp[i][j]+dp[i][j-1]+dp[i+1][j])+1, & j=M\\
+dp[i][j]=\frac 1 4(dp[i][j]+dp[i][j-1]+dp[i][j+1]+dp[i+1][j])+1, & \operatorname{other.}\\
+\end{cases}</script><p>可以发现，我们其实还有一个特殊情况就是当 $M=1$ 的时候，这个递推式应该是非法的，它访问了不应该存在的元素，所以要提前特判掉，这个和普通的随机游走模型式一样的，可以列出方程式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+dp[i][1]&=\frac 1 2(dp[i][1] + dp[i + 1][1])+1\\
+dp[i][1]&=dp[i+1][1]+2
+\end{aligned}</script><p>化简后得到第二个式子，考虑倒推着做，那么答案即为 $2\times(N-x)$，$x$ 是初始横坐标。</p>
+<p>和刚刚一样的，我们会发现机器人不能往上走，这就意味着 $dp[i][j]$ 的推导需要用到 $dp[i + 1][j]$，但 $dp[i+1][j]$ 的推导却用不到 $dp[i][j]$，这也是刚刚我们倒推着做的原因。那么同样在这里也可以用这样的思路，于是用 $dp[i+1][j]$ 作为已知数，剩余的作为未知数，可以把刚刚的方程组化为下面这样：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\frac 2 3dp[i][j]-\frac{1}{3}dp[i][j+1]=\frac 1 3dp[i+1][j]+1, & j=1\\
+-\frac 1 3 dp[i][j-1]+\frac 2 3 dp[i][j]=\frac 1 3dp[i+1][j]+1, & j=M\\
+-\frac 1 4dp[i][j-1]+\frac 3 4dp[i][j]-\frac 1 4dp[i][j+1]=\frac 1 4dp[i+1][j]+1, & \operatorname{other.}\\
+\end{cases}</script><p>并且考虑到精度问题，我们可以发现每一个式子的分母都是一样的，可以化掉，并利用高斯消元解这个方程式，可以列出像下面这样的系数矩阵：（以 $4\times 4$ 的矩阵为例）</p>
+<script type="math/tex; mode=display">
+\left[\ \begin{matrix}
+2 & -1 & 0 & 0 & | & dp[i+1][j]+3\\
+-1 & 3 & -1 & 0& | & dp[i+1][j]+4\\
+0 & -1 & 3 & -1& | & dp[i+1][j]+4\\
+0 & 0 & -1 & 2 & | & dp[i+1][j]+3
+\end{matrix}\ \right]</script><p>很显然，如果我们是常规的高斯消元的话，$O(n^3\times n)$ 即高斯消元复杂度乘以总行数，这样的复杂度我们完全是吃不消的，这时候就会注意到系数矩阵有一个很特殊的性质，就是每一行最多有用的系数只有三个，那么高斯消元就不必一行一行的消，即我们要考虑除了高斯消元以外更快的消元方式。</p>
+<p>可以观察到由于上下两行始终只差一个格子，所以可以按照倍率每一次消掉多余的那一个，就可以得到一个上三角的结果，最后直接套用并计算即可。这样的话复杂度就会降到 $O(NM)$，其中 $M$ 是每行消元和计算的复杂度。</p>
+<blockquote>
+<p><strong>友情链接：</strong></p>
+<p><a href="https://blog.517group.cn/posts/62555/">【算法介绍】高斯消元 | 祝馀宫</a><br><a href="https://blog.517group.cn/posts/37502/"><em>【算法介绍】拉格朗日插值法 | 祝馀宫</em></a></p>
+</blockquote>
+<p>还有一个被遗忘的点，就是忘记说动规初始值了，显然初始值最后一行就已经不用移动了，所以初始值是最后一行的值全为 $0$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="comment">// typedef __int128 int128;</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span> , <span class="type">int</span> &gt; pii;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> FastIO </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// char buf[1 &lt;&lt; 20], *p1, *p2;</span></span><br><span class="line">    <span class="comment">// #define getchar() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)</span></span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">inline</span> T <span class="title">read</span><span class="params">(T&amp; x)</span> </span>&#123;</span><br><span class="line">        x = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> f = <span class="number">1</span>;</span><br><span class="line">        <span class="type">char</span> ch;</span><br><span class="line">        <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(ch = <span class="built_in">getchar</span>())) <span class="keyword">if</span> (ch == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="built_in">isdigit</span>(ch)) x = (x &lt;&lt; <span class="number">1</span>) + (x &lt;&lt; <span class="number">3</span>) + (ch ^ <span class="number">48</span>), ch = <span class="built_in">getchar</span>();</span><br><span class="line">        x *= f;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt; <span class="keyword">inline</span> <span class="type">void</span> <span class="title">read</span><span class="params">(T&amp; x, Args &amp;...x_)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">read</span>(x);</span><br><span class="line">        <span class="built_in">read</span>(x_...);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ll x;</span><br><span class="line">        <span class="built_in">read</span>(x);</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> FastIO;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m, x, y;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">Input</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">read</span>(n, m, x, y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> g[<span class="number">1010</span>][<span class="number">1010</span>];</span><br><span class="line"><span class="type">double</span> dp[<span class="number">1010</span>][<span class="number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">Calc</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="type">double</span> k = g[i + <span class="number">1</span>][i] / g[i][i];</span><br><span class="line">        g[i + <span class="number">1</span>][i] = <span class="number">0</span>;</span><br><span class="line">        g[i + <span class="number">1</span>][i + <span class="number">1</span>] -= g[i][i + <span class="number">1</span>] * k;</span><br><span class="line">        g[i + <span class="number">1</span>][m + <span class="number">1</span>] -= g[i][m + <span class="number">1</span>] * k;</span><br><span class="line">    &#125;</span><br><span class="line">    dp[i][m] = g[m][m + <span class="number">1</span>] / g[m][m];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = m - <span class="number">1</span>; j &gt;= <span class="number">1</span>; j--) &#123;</span><br><span class="line">        dp[i][j] = (g[j][m+<span class="number">1</span>] - dp[i][j + <span class="number">1</span>] * g[j][j + <span class="number">1</span>]) / g[j][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">Work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(m == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="number">2</span> * (n - x));</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = n - <span class="number">1</span>; i &gt;= x; i--) &#123;</span><br><span class="line">        g[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">2</span>, g[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">-1</span>, g[<span class="number">1</span>][m + <span class="number">1</span>] = dp[i + <span class="number">1</span>][<span class="number">1</span>] + <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">2</span>; j &lt; m; j++) &#123;</span><br><span class="line">            g[j][j - <span class="number">1</span>] = <span class="number">-1</span>, g[j][j] = <span class="number">3</span>, g[j][j + <span class="number">1</span>] = <span class="number">-1</span>;</span><br><span class="line">            g[j][m + <span class="number">1</span>] = dp[i + <span class="number">1</span>][j] + <span class="number">4</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        g[m][m - <span class="number">1</span>] = <span class="number">-1</span>, g[m][m] = <span class="number">2</span>, g[m][m + <span class="number">1</span>] = dp[i + <span class="number">1</span>][m] + <span class="number">3</span>;</span><br><span class="line">        <span class="built_in">Calc</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.4lf\n&quot;</span>, dp[x][y]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> T = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">        <span class="built_in">Input</span>();</span><br><span class="line">        <span class="built_in">Work</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="算法实战：甜饵般的答案"><a href="#算法实战：甜饵般的答案" class="headerlink" title="算法实战：甜饵般的答案"></a>算法实战：甜饵般的答案</h1><p>查看相关算法标签喵！</p>
+<p><strong>参考资料（以下排名不分先后）</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/dp/probability/">概率 DP - OI Wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/math/probability/basic-conception/">基本概念 - OI Wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/math/probability/exp-var/">随机变量的数字特征 - OI Wiki</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.517Group.cn">仙蕊缀锦</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.517group.cn/posts/3961/">https://blog.517group.cn/posts/3961/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.517Group.cn" target="_blank">祝馀宫</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a><a class="post-meta__tags" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a><a class="post-meta__tags" href="/tags/%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9B/">概率期望</a></div><div class="post_share"><div class="social-share" data-image="https://image.jiuci.top/i/2025/03/16/njv326.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://npm.elemecdn.com/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://npm.elemecdn.com/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/33386/" title="【算法介绍】斯特林数与卡特兰数"><img class="cover" src="https://image.jiuci.top/i/2025/03/08/do2ugt.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【算法介绍】斯特林数与卡特兰数</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/33386/" title="【算法介绍】斯特林数与卡特兰数"><img class="cover" src="https://image.jiuci.top/i/2025/03/08/do2ugt.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-13</div><div class="title">【算法介绍】斯特林数与卡特兰数</div></div></a></div><div><a href="/posts/52315/" title="【算法介绍】排列组合问题汇总"><img class="cover" src="https://image.jiuci.top/i/2025/03/02/yx12en.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-03</div><div class="title">【算法介绍】排列组合问题汇总</div></div></a></div><div><a href="/posts/64292/" title="【算法介绍】中国剩余定理及其拓展"><img class="cover" src="https://image.jiuci.top/i/2025/02/26/umsvkr.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-26</div><div class="title">【算法介绍】中国剩余定理及其拓展</div></div></a></div><div><a href="/posts/39663/" title="【算法介绍】杜教筛和 Min_25 筛"><img class="cover" src="https://image.jiuci.top/i/2025/02/12/weeu1o.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-10</div><div class="title">【算法介绍】杜教筛和 Min_25 筛</div></div></a></div><div><a href="/posts/52802/" title="【算法介绍】原根与离散对数"><img class="cover" src="https://image.jiuci.top/i/2025/02/13/gyjep7.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-04</div><div class="title">【算法介绍】原根与离散对数</div></div></a></div><div><a href="/posts/46066/" title="【算法介绍】快速傅里叶变换"><img class="cover" src="https://image.jiuci.top/i/2025/01/23/nmaeqe.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-23</div><div class="title">【算法介绍】快速傅里叶变换</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/ChioriAvatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">仙蕊缀锦</div><div class="author-info__description">知识，与你分享</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">225</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" href="/about/"><i class="fas fa-star"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E6%80%BB%E8%A7%88%EF%BC%9A%E7%BE%A4%E6%98%9F%E5%B2%B8%E8%90%BD%E4%B9%8B%E5%A4%9C"><span class="toc-number">1.</span> <span class="toc-text">文章总览：群星岸落之夜</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E5%9F%BA%E7%A1%80%EF%BC%9A%E7%A9%BF%E8%BF%87%E9%94%81%E5%AD%94%E4%B9%8B%E9%A3%8E"><span class="toc-number">2.</span> <span class="toc-text">概念基础：穿过锁孔之风</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E5%AE%9A%E4%B9%89%EF%BC%9A%E8%BF%99%E6%98%AF%E9%AD%94%E6%B3%95%E5%93%9F"><span class="toc-number">2.1.</span> <span class="toc-text">概率定义：这是魔法哟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E8%AE%A1%E7%AE%97%EF%BC%9A%E4%BD%A0%E5%BC%80%E7%AA%8D%E4%BA%86%E5%90%97"><span class="toc-number">2.2.</span> <span class="toc-text">简单计算：你开窍了吗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%EF%BC%9A%E6%89%93%E5%BC%80%E7%9A%84%E6%A0%BC%E5%B1%80"><span class="toc-number">2.3.</span> <span class="toc-text">条件概率：打开的格局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E5%85%AC%E5%BC%8F%EF%BC%9A%E7%9C%8B%E7%9C%8B%E5%A5%BD%E7%9C%8B%E7%9A%84"><span class="toc-number">2.4.</span> <span class="toc-text">特殊公式：看看好看的</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E8%BF%9B%E9%98%B6%EF%BC%9A%E8%BF%9B%E5%85%A5%E7%9B%9B%E5%A4%8F%E4%B9%8B%E9%97%A8"><span class="toc-number">3.</span> <span class="toc-text">概念进阶：进入盛夏之门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%9F%E6%9C%9B%E6%A6%82%E5%BF%B5%EF%BC%9A%E5%86%B7%E6%BC%A0%E7%9A%84%E8%AF%9A%E5%AE%9E"><span class="toc-number">3.1.</span> <span class="toc-text">期望概念：冷漠的诚实</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%B7%AE%E6%A6%82%E5%BF%B5%EF%BC%9A%E9%A5%A5%E9%A5%BF%E7%9A%84%E5%9C%B0%E6%99%AF"><span class="toc-number">3.2.</span> <span class="toc-text">方差概念：饥饿的地景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%EF%BC%9A%E8%A7%86%E7%95%8C%E5%A4%96%E6%9D%A5%E4%BF%A1"><span class="toc-number">3.3.</span> <span class="toc-text">线性相关：视界外来信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%85%B6%E4%B8%80%EF%BC%9A%E4%BC%AF%E5%8A%AA%E5%88%A9%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.4.</span> <span class="toc-text">分布其一：伯努利实验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%85%B6%E4%BA%8C%EF%BC%9A%E8%A7%A3%E8%AF%BB%E4%B8%8E%E7%81%B5%E6%84%9F"><span class="toc-number">3.5.</span> <span class="toc-text">分布其二：解读与灵感</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%85%B6%E4%B8%89%EF%BC%9A%E6%97%A9%E8%AF%B4%E6%98%AF%E9%AD%94%E6%B3%95"><span class="toc-number">3.6.</span> <span class="toc-text">分布其三：早说是魔法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E4%BE%8B%E9%A2%98%EF%BC%9A%E7%AC%AC%E5%8D%81%E5%85%AD%E6%8A%8A%E9%92%A5%E5%8C%99"><span class="toc-number">4.</span> <span class="toc-text">基础例题：第十六把钥匙</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%9F%E6%9C%9B%E6%80%A7%E8%B4%A8%EF%BC%9A%E6%9C%9F%E6%9C%9B%E7%BA%BF%E6%80%A7%E6%80%A7"><span class="toc-number">4.1.</span> <span class="toc-text">期望性质：期望线性性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%9F%E6%9C%9B%E4%BE%8B%E9%A2%98%EF%BC%9A%E5%BE%97%E6%89%93%E5%BC%80%E6%80%9D%E8%B7%AF"><span class="toc-number">4.2.</span> <span class="toc-text">期望例题：得打开思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E4%BE%8B%E9%A2%98%EF%BC%9A%E8%8B%A6%E8%8D%AF%E4%BC%BC%E7%9A%84%E7%9C%9F%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">进阶例题：苦药似的真理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%B8%E8%B5%B0%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%A9%BA%E5%9F%9F%E7%9A%84%E5%A3%81%E5%9E%92"><span class="toc-number">5.1.</span> <span class="toc-text">游走模型：空域的壁垒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E4%BE%8B%E9%A2%98%EF%BC%9A%E4%B8%96%E7%95%8C%E7%9A%84%E5%A4%A7%E9%97%A8"><span class="toc-number">5.2.</span> <span class="toc-text">模型例题：世界的大门</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E6%88%98%EF%BC%9A%E7%94%9C%E9%A5%B5%E8%88%AC%E7%9A%84%E7%AD%94%E6%A1%88"><span class="toc-number">6.</span> <span class="toc-text">算法实战：甜饵般的答案</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/3961/" title="【算法介绍】概率与期望及其计算"><img src="https://image.jiuci.top/i/2025/03/16/njv326.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【算法介绍】概率与期望及其计算"/></a><div class="content"><a class="title" href="/posts/3961/" title="【算法介绍】概率与期望及其计算">【算法介绍】概率与期望及其计算</a><time datetime="2025-03-16T06:29:08.000Z" title="发表于 2025-03-16 14:29:08">2025-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/33386/" title="【算法介绍】斯特林数与卡特兰数"><img src="https://image.jiuci.top/i/2025/03/08/do2ugt.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【算法介绍】斯特林数与卡特兰数"/></a><div class="content"><a class="title" href="/posts/33386/" title="【算法介绍】斯特林数与卡特兰数">【算法介绍】斯特林数与卡特兰数</a><time datetime="2025-03-13T10:15:02.000Z" title="发表于 2025-03-13 18:15:02">2025-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/33291/" title="【奇技淫巧】欧拉函数与欧拉定理"><img src="https://image.jiuci.top/i/2025/03/08/nu4tvj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【奇技淫巧】欧拉函数与欧拉定理"/></a><div class="content"><a class="title" href="/posts/33291/" title="【奇技淫巧】欧拉函数与欧拉定理">【奇技淫巧】欧拉函数与欧拉定理</a><time datetime="2025-03-08T06:36:56.000Z" title="发表于 2025-03-08 14:36:56">2025-03-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/52315/" title="【算法介绍】排列组合问题汇总"><img src="https://image.jiuci.top/i/2025/03/02/yx12en.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【算法介绍】排列组合问题汇总"/></a><div class="content"><a class="title" href="/posts/52315/" title="【算法介绍】排列组合问题汇总">【算法介绍】排列组合问题汇总</a><time datetime="2025-03-03T10:07:30.000Z" title="发表于 2025-03-03 18:07:30">2025-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/64292/" title="【算法介绍】中国剩余定理及其拓展"><img src="https://image.jiuci.top/i/2025/02/26/umsvkr.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【算法介绍】中国剩余定理及其拓展"/></a><div class="content"><a class="title" href="/posts/64292/" title="【算法介绍】中国剩余定理及其拓展">【算法介绍】中国剩余定理及其拓展</a><time datetime="2025-02-26T09:52:04.000Z" title="发表于 2025-02-26 17:52:04">2025-02-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://act-webstatic.mihoyo.com/upload/contentweb/hk4e/34ec75c9ed70f793cdd698ad1a4764e5_731983624099835302.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By 仙蕊缀锦</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a><span class="footer-separator">|</span><span>萌ICP备 </span><a target="_blank" rel="noopener" href="https://icp.gov.moe/?keyword=20250528">20250528号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://npm.elemecdn.com/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://npm.elemecdn.com/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+
+  const initWaline = (Fn) => {
+    const waline = Fn(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.517Group.cn/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, {"requiredMeta":["mail"],"locale":{"placeholder":"昵称和邮箱为必填项，为了您能及时收到相关回复的邮件通知，请确保邮箱的正确性！"}}))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+  }
+
+  const loadWaline = async () => {
+    if (initFn) initWaline(initFn)
+    else {
+      await getCSS('https://npm.elemecdn.com/@waline/client/dist/waline.css')
+      const { init } = await import('https://npm.elemecdn.com/@waline/client/dist/waline.js')
+      initFn = init || Waline.init
+      initWaline(initFn)
+      window.walineFn = initFn
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/517题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 zMrの517题解 (29)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/HDU题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🤯 zMrのHDU题解 (12)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/POJ题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🤕 zMrのPOJ题解 (8)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/USACO题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🐮 zMrの奶牛题解 (9)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/hexo/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">😎 zMrの博客搭建 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/写作/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 zMrの转载短文 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/洛谷题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🤒 zMrの你谷题解 (38)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/算法笔记/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">💡 zMrの编程学习 (68)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/CF题解/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🥳 zMrのCF题解 (14)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/とある/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🪙 zMrの超电磁炮 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/花雨/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🌸 花雨の短篇小说 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.517Group.cn/categories/技巧/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🤪 zMrの奇技淫巧 (7)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><a class="magnet_link_more"  href="https://blog.517Group.cn/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(33.333333333333336% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #b30070}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/18203/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-11-27</span><a class="blog-slider__title" href="posts/18203/" alt="">Hello everyone</a><div class="blog-slider__text">大家好！</div><a class="blog-slider__button" href="posts/18203/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/55084/" alt=""><img width="48" height="48" src="/img/high_pos.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-12-06</span><a class="blog-slider__title" href="posts/55084/" alt="">高精度算法</a><div class="blog-slider__text">庞大的数字，从更加庞大的视角来看呢？—— 高精度</div><a class="blog-slider__button" href="posts/55084/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/61237/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-12-14</span><a class="blog-slider__title" href="posts/61237/" alt="">排序算法</a><div class="blog-slider__text">嘿，我给一你个排序尝尝！</div><a class="blog-slider__button" href="posts/61237/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/11529/" alt=""><img width="48" height="48" src="/img/Platinum_20231219.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-12-19</span><a class="blog-slider__title" href="posts/11529/" alt="">【转】破碎的白金色爱恋</a><div class="blog-slider__text">无法挽回</div><a class="blog-slider__button" href="posts/11529/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/20319/" alt=""><img width="48" height="48" src="/img/BluePoison_20240202.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-12-22</span><a class="blog-slider__title" href="posts/20319/" alt="">【转】堕落的天蓝色天使</a><div class="blog-slider__text">蓝毒与源石虫</div><a class="blog-slider__button" href="posts/20319/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/12268/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-02-08</span><a class="blog-slider__title" href="posts/12268/" alt="">517编程7段第五课T2</a><div class="blog-slider__text">关于最长上升子序列……</div><a class="blog-slider__button" href="posts/12268/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/48555/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-02-08</span><a class="blog-slider__title" href="posts/48555/" alt="">线段树</a><div class="blog-slider__text">一棵有用的大树</div><a class="blog-slider__button" href="posts/48555/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/16219/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-17</span><a class="blog-slider__title" href="posts/16219/" alt="">浅析Tarjan算法</a><div class="blog-slider__text">割边？割点？点双？边双？</div><a class="blog-slider__button" href="posts/16219/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/20300/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-04-15</span><a class="blog-slider__title" href="posts/20300/" alt="">枚举算法</a><div class="blog-slider__text">暴力出奇迹！</div><a class="blog-slider__button" href="posts/20300/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/51855/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-04-20</span><a class="blog-slider__title" href="posts/51855/" alt="">贪心算法</a><div class="blog-slider__text">money，money，moneymoneymoney！</div><a class="blog-slider__button" href="posts/51855/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/4632/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-05-19</span><a class="blog-slider__title" href="posts/4632/" alt="">二分图</a><div class="blog-slider__text">二分？图！</div><a class="blog-slider__button" href="posts/4632/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/38675/" alt=""><img width="48" height="48" src="https://pic2.zhimg.com/v2-3d602f4baf9b9e13cd6bde329f5f5ee5_r.jpg?source=172ae18b" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-05-22</span><a class="blog-slider__title" href="posts/38675/" alt="">STL：Map，Set（Multiset &amp; Bitset）</a><div class="blog-slider__text">好用喵！</div><a class="blog-slider__button" href="posts/38675/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/3037/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gwngoe.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-05</span><a class="blog-slider__title" href="posts/3037/" alt="">树状数组，这一篇就够了！</a><div class="blog-slider__text">一棵简单的小树</div><a class="blog-slider__button" href="posts/3037/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/3381/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gxdq6g.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-07</span><a class="blog-slider__title" href="posts/3381/" alt="">倍增算法</a><div class="blog-slider__text">1，2，4，8……</div><a class="blog-slider__button" href="posts/3381/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/54370/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h3wbfz.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-08</span><a class="blog-slider__title" href="posts/54370/" alt="">三分法</a><div class="blog-slider__text">二分？还是……三分！</div><a class="blog-slider__button" href="posts/54370/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/16895/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h6a5xz.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-09</span><a class="blog-slider__title" href="posts/16895/" alt="">01分数规划</a><div class="blog-slider__text">有点难评</div><a class="blog-slider__button" href="posts/16895/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/27720/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/grebh9.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-24</span><a class="blog-slider__title" href="posts/27720/" alt="">树的直径</a><div class="blog-slider__text">这是一棵树，但你可以把它拉长</div><a class="blog-slider__button" href="posts/27720/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/61809/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/greigw.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-24</span><a class="blog-slider__title" href="posts/61809/" alt="">并查集</a><div class="blog-slider__text">前面是一篇茂密的森林！</div><a class="blog-slider__button" href="posts/61809/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/20180/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gwnsv7.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-24</span><a class="blog-slider__title" href="posts/20180/" alt="">树的重心</a><div class="blog-slider__text">原来，你也有重心</div><a class="blog-slider__button" href="posts/20180/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/9711/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h69xej.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-01</span><a class="blog-slider__title" href="posts/9711/" alt="">01背包</a><div class="blog-slider__text">贫穷的背包</div><a class="blog-slider__button" href="posts/9711/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/15524/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/greilk.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-03</span><a class="blog-slider__title" href="posts/15524/" alt="">完全背包</a><div class="blog-slider__text">土豪的背包</div><a class="blog-slider__button" href="posts/15524/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/30148/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h2njhh.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-04</span><a class="blog-slider__title" href="posts/30148/" alt="">多重背包</a><div class="blog-slider__text">合理的背包</div><a class="blog-slider__button" href="posts/30148/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/55387/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/greqqx.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-06</span><a class="blog-slider__title" href="posts/55387/" alt="">状压DP</a><div class="blog-slider__text">这不是饼干，这是压缩状态！</div><a class="blog-slider__button" href="posts/55387/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/8498/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gz61ww.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-07</span><a class="blog-slider__title" href="posts/8498/" alt="">单调队列</a><div class="blog-slider__text">这是一个为了维护单调性而弹出元素的队列……</div><a class="blog-slider__button" href="posts/8498/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/33564/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gz65al.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-08</span><a class="blog-slider__title" href="posts/33564/" alt="">单调栈</a><div class="blog-slider__text">这是单调队列的一个好朋友——单调栈</div><a class="blog-slider__button" href="posts/33564/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/35125/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h1zgqq.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-21</span><a class="blog-slider__title" href="posts/35125/" alt="">【算法介绍】动态规划</a><div class="blog-slider__text">振袖秋风问红叶</div><a class="blog-slider__button" href="posts/35125/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/5784/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gxe0b8.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-24</span><a class="blog-slider__title" href="posts/5784/" alt="">【算法介绍】连通分量</a><div class="blog-slider__text">我们终将重逢</div><a class="blog-slider__button" href="posts/5784/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/27694/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gz6iip.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-25</span><a class="blog-slider__title" href="posts/27694/" alt="">【算法介绍】素数筛法</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="posts/27694/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/63427/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h0zatm.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-25</span><a class="blog-slider__title" href="posts/63427/" alt="">【算法介绍】欧几里得算法</a><div class="blog-slider__text">影照浮世风流</div><a class="blog-slider__button" href="posts/63427/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/26645/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gz65mu.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-28</span><a class="blog-slider__title" href="posts/26645/" alt="">【算法介绍】数位DP</a><div class="blog-slider__text">出发！火之国</div><a class="blog-slider__button" href="posts/26645/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/30757/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h3wos1.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-29</span><a class="blog-slider__title" href="posts/30757/" alt="">【算法介绍】二分图相关算法</a><div class="blog-slider__text">我的名字是阿斯托洛吉斯·莫娜·梅姬斯图斯，意为「伟大的占星术士莫娜」。 如果想找我占卜，记住我的名字是最基本的尊重…而且要一次性全念对！</div><a class="blog-slider__button" href="posts/30757/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/47065/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h18ikp.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-30</span><a class="blog-slider__title" href="posts/47065/" alt="">【算法介绍】轮廓线DP</a><div class="blog-slider__text">蒙德城的迪卢克，应约而来。闲聊恕不奉陪，如果你是想做一番大事，我倒有点兴致。</div><a class="blog-slider__button" href="posts/47065/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/30892/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gxdn8b.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-31</span><a class="blog-slider__title" href="posts/30892/" alt="">【算法介绍】字符串算法</a><div class="blog-slider__text">初次见面，我是瑶瑶，忝列门墙，师从歌尘浪市真君。出门在外，若有不便…请叫上我！瑶瑶有礼了。</div><a class="blog-slider__button" href="posts/30892/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/41953/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gyaouh.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-04</span><a class="blog-slider__title" href="posts/41953/" alt="">【算法介绍】区间类动态规划</a><div class="blog-slider__text">这就是你的冒险团吗？真好啊…又热闹，又有人情味。啊，我是「班尼冒险团」的团长班尼特！能把我列入你们的合作伙伴吗？拜托了！</div><a class="blog-slider__button" href="posts/41953/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/32907/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gxdwsz.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-06</span><a class="blog-slider__title" href="posts/32907/" alt="">【算法介绍】树形动态规划</a><div class="blog-slider__text">我是诺艾尔，西风骑士团的女仆，从今天起会陪你一起去冒险。如果遇到任何困扰或者麻烦，不用担心，我都会尽全力帮你解决的。嗯，现在就可以哦。</div><a class="blog-slider__button" href="posts/32907/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/9654/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h2njx2.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-10</span><a class="blog-slider__title" href="posts/9654/" alt="">【算法介绍】单调队列优化动态规划</a><div class="blog-slider__text">我是七七，是个僵尸…啊，还要说什么来着。</div><a class="blog-slider__button" href="posts/9654/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/23117/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gybeqa.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-14</span><a class="blog-slider__title" href="posts/23117/" alt="">【算法介绍】斜率优化优化动态规划</a><div class="blog-slider__text">「猫尾酒馆」的招牌调酒师，迪奥娜，我的出场费可是很贵的。唔？你居然…不是为了酒才来的？哼，那你的邀请…我就勉为其难地接受了。</div><a class="blog-slider__button" href="posts/23117/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/35875/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h2n46n.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-23</span><a class="blog-slider__title" href="posts/35875/" alt="">【算法介绍】Boruvka 算法</a><div class="blog-slider__text">我的名字是九条裟罗，你记不住也无妨，只需知道：我将永远护卫稻妻、践行鸣神的意志，不论神鬼，遇敌必除！呼…别紧张，既然答应与你并肩，我自当尽心尽职。大义外的事情，我不会计较的。</div><a class="blog-slider__button" href="posts/35875/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/37502/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h0zro1.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-27</span><a class="blog-slider__title" href="posts/37502/" alt="">【算法介绍】拉格朗日插值法</a><div class="blog-slider__text">初次见面，异乡的旅人，你的名字我可是早就听说了。只要你不嫌弃，我托马，从今天起就是你的朋友了。</div><a class="blog-slider__button" href="posts/37502/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/62555/" alt=""><img width="48" height="48" src="https://ooo.0x0.ooo/2024/09/29/O4Vt2b.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-29</span><a class="blog-slider__title" href="posts/62555/" alt="">【算法介绍】高斯消元</a><div class="blog-slider__text">「马力卜」的基尼奇，初次见面，告知委托内容时请附上你的出价。</div><a class="blog-slider__button" href="posts/62555/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/14895/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/grecsz.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-10-04</span><a class="blog-slider__title" href="posts/14895/" alt="">【算法介绍】点分治算法</a><div class="blog-slider__text">「终末番」早柚，参上。 呼——如果没有什么事情的话，我先去睡觉了。对了，不准趁我睡觉的时候偷偷摸我的头。</div><a class="blog-slider__button" href="posts/14895/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/15452/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h1z97o.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-10-27</span><a class="blog-slider__title" href="posts/15452/" alt="">【算法介绍】分块思想</a><div class="blog-slider__text">这是当年教令院的杰出学者奖，这是须弥解谜协会终身成就奖，还有遗迹机关研讨会的…如何，可有志愿拜入我门下？</div><a class="blog-slider__button" href="posts/15452/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/8691/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h05spl.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-10-30</span><a class="blog-slider__title" href="posts/8691/" alt="">【算法介绍】基础莫队</a><div class="blog-slider__text">你好呀，远道而来的旅行者，夜晚的沙漠可是很严酷的，不如就在敝处稍住一晚吧，由我来照看你的无梦之夜。</div><a class="blog-slider__button" href="posts/8691/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/29018/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h1zn35.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-02</span><a class="blog-slider__title" href="posts/29018/" alt="">【算法介绍】启发式合并</a><div class="blog-slider__text">哎呀呀，这不是大名鼎鼎的旅行者吗？我是旅行商人多莉·桑歌玛哈巴依。作为给你的见面礼，我这儿的商品全部限时九折优惠，赶快来挑选吧，我帮你打包~</div><a class="blog-slider__button" href="posts/29018/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/10295/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h05xji.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-04</span><a class="blog-slider__title" href="posts/10295/" alt="">【算法介绍】树上莫队</a><div class="blog-slider__text">在下行秋，不过书海一蠹。某虽不才，仍愿为君略尽绵薄。难得有机会说这种风格的台词，感觉还不错。</div><a class="blog-slider__button" href="posts/10295/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/55621/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h05cla.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-06</span><a class="blog-slider__title" href="posts/55621/" alt="">【算法介绍】矩阵乘法</a><div class="blog-slider__text">我叫千织，「千织屋」的老板。有服装定制类需求的话，欢迎找我。其他需求，就看你有没有足够用来交换的东西了，有来有回才叫「生意」嘛。</div><a class="blog-slider__button" href="posts/55621/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/1858/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h0zlo7.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-07</span><a class="blog-slider__title" href="posts/1858/" alt="">【算法介绍】KMP算法</a><div class="blog-slider__text">见习巡林员柯莱，前来报到！我会保障你在林间出行时的安全——呼，总算能说出这句出场词了，我没念错字吧…</div><a class="blog-slider__button" href="posts/1858/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/9677/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h05kae.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-11</span><a class="blog-slider__title" href="posts/9677/" alt="">【算法介绍】线段树合并</a><div class="blog-slider__text">我是七星之「天权」，凝光。要做个交易吗？你来做我的贴身侍卫，而我，会教导你在璃月出人头地的技巧。</div><a class="blog-slider__button" href="posts/9677/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/25415/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gz5ye0.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-12</span><a class="blog-slider__title" href="posts/25415/" alt="">【算法介绍】最小生成树</a><div class="blog-slider__text">你好，我是荒泷派的二把手久岐忍。我们承包多种业务，货运物流、安保维持、房屋补漏、表演驻唱等等。需要我们请随时联系，这是我的名片，还请收下。</div><a class="blog-slider__button" href="posts/25415/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/49075/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gyb3t0.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-15</span><a class="blog-slider__title" href="posts/49075/" alt="">【算法介绍】最短路算法</a><div class="blog-slider__text">你好呀，我是「回声之子」的卡齐娜。喜欢吃颗粒果，想要变强，不擅长打架。啊…不是说这些的时候？那、那…请问你接下来想去哪里走走？我挺熟悉这一带的，就让我来带路吧。</div><a class="blog-slider__button" href="posts/49075/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/43633/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gwna5g.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-17</span><a class="blog-slider__title" href="posts/43633/" alt="">【算法介绍】Tarjan 求强连通分量</a><div class="blog-slider__text">我只是每天都做同样的事，和真正的骑士比起来还差远了…但这是通往骑士之路的修行，修行可不能只是嘴上说说而已啊。</div><a class="blog-slider__button" href="posts/43633/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/44810/" alt=""><img width="48" height="48" src="https://cdn.luogu.com.cn/upload/image_hosting/wcudkkfq.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-19</span><a class="blog-slider__title" href="posts/44810/" alt="">【算法介绍】Tarjan 求双连通分量</a><div class="blog-slider__text">我名重云，家族久居璃月，世代以驱邪除魔为业。今日萍水相逢，看来我与阁下有些缘分。唔…不收钱的，不收钱！</div><a class="blog-slider__button" href="posts/44810/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/59654/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h2n5qu.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-27</span><a class="blog-slider__title" href="posts/59654/" alt="">【算法介绍】笛卡尔树</a><div class="blog-slider__text">你好，我是来自「烟谜主」的欧洛伦。我不是卖菜的，但是可以送你一些。</div><a class="blog-slider__button" href="posts/59654/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/38118/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gwncqs.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-04</span><a class="blog-slider__title" href="posts/38118/" alt="">【奇技淫巧】特殊思维题的复杂度分析</a><div class="blog-slider__text">我是砂糖，炼金术的…研究员。听说你去过很多地方，一定也…不，没什么，第一次见面，不该这么麻烦你。但…如果你愿意，和我讲讲路上有意思的事，那个…我，会很开心的。</div><a class="blog-slider__button" href="posts/38118/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/43244/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gybah5.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-08</span><a class="blog-slider__title" href="posts/43244/" alt="">【算法介绍】树链剖分</a><div class="blog-slider__text">是我哟，全提瓦特最棒的大魔术师——林尼。惊喜吗？意外吗？想知道我是怎么出现在你面前的吗？嗯——你那双像黄宝石一般晶莹剔透的眼睛，让我很中意哦！让我再为你表演一次吧。看好了哦，这回，千万不要眨眼。</div><a class="blog-slider__button" href="posts/43244/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/3880/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h6a1wi.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-10</span><a class="blog-slider__title" href="posts/3880/" alt="">【算法介绍】二维数点</a><div class="blog-slider__text">侦察骑士安柏，前来报到！今后有什么需要帮忙的，尽管说好啦！</div><a class="blog-slider__button" href="posts/3880/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/24357/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/gyay8f.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-11</span><a class="blog-slider__title" href="posts/24357/" alt="">【算法介绍】扫描线思想</a><div class="blog-slider__text">“明日复明日，明日何其多” —— 总之，快快行动起来吧！</div><a class="blog-slider__button" href="posts/24357/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/8615/" alt=""><img width="48" height="48" src="https://ooo.0x0.ooo/2024/12/18/OEqWtY.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-17</span><a class="blog-slider__title" href="posts/8615/" alt="">【基础语法】第一篇之 “读入输出”</a><div class="blog-slider__text">潜伏的陷阱</div><a class="blog-slider__button" href="posts/8615/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/32689/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h2nf78.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-18</span><a class="blog-slider__title" href="posts/32689/" alt="">【算法介绍】基环树</a><div class="blog-slider__text">我是枫丹特巡队队长夏沃蕾，寒暄就免了，有什么棘手的案件需要处理吗？</div><a class="blog-slider__button" href="posts/32689/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/8903/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h05d9w.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-20</span><a class="blog-slider__title" href="posts/8903/" alt="">Math Combinatorial Counting [I]</a><div class="blog-slider__text">First course of Combinatorial Counting, we will discuss the definition of Combinatorial and some common proposition.</div><a class="blog-slider__button" href="posts/8903/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/10762/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h3wjk1.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-27</span><a class="blog-slider__title" href="posts/10762/" alt="">【算法简介】递归与回溯</a><div class="blog-slider__text">初次见面，我是林尼的魔术助手，工作事宜请咨询林尼。观看演出请咨询售票处。找我？…请长话短说。</div><a class="blog-slider__button" href="posts/10762/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/6026/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h1z73s.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-28</span><a class="blog-slider__title" href="posts/6026/" alt="">【算法介绍】曼哈顿与切比雪夫距离</a><div class="blog-slider__text">我是来自璃月的厨师香菱，最擅长的是做各种捞…捞，料理…哎呀，练了那么多次，还是会紧张，嘿。</div><a class="blog-slider__button" href="posts/6026/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/23111/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h1zwco.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-29</span><a class="blog-slider__title" href="posts/23111/" alt="">【算法介绍】拓展KMP（Z函数）</a><div class="blog-slider__text">我即断罪之皇女，真名为菲谢尔。应命运的召唤降临在此间——哎？你也是，异世界的旅人吗…？那好吧，本皇女恩许你同行。</div><a class="blog-slider__button" href="posts/23111/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/60004/" alt=""><img width="48" height="48" src="https://cdn.luogu.com.cn/upload/image_hosting/b2xexyal.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-30</span><a class="blog-slider__title" href="posts/60004/" alt="">【算法介绍】Manacher 算法</a><div class="blog-slider__text">我是北斗，听过我的「南十字」船队吗？如果你也喜欢冒险，那就跟着我吧。我罩你。</div><a class="blog-slider__button" href="posts/60004/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/2024to2025/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/01/h3we3z.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-31</span><a class="blog-slider__title" href="posts/2024to2025/" alt="">【年度总结】回首与展望</a><div class="blog-slider__text">哎哎哎，又到海灯节了嘛？</div><a class="blog-slider__button" href="posts/2024to2025/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/35771/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/05/n84wbs.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-05</span><a class="blog-slider__title" href="posts/35771/" alt="">【算法介绍】字典树算法</a><div class="blog-slider__text">从世界之外漂流而来的旅行者，被神带走血亲，自此踏上寻找七神之路。 ——「我们不会孤军奋战」</div><a class="blog-slider__button" href="posts/35771/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/33267/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/10/xb83u9.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-10</span><a class="blog-slider__title" href="posts/33267/" alt="">【奇技淫巧】环形动态规划设计</a><div class="blog-slider__text">我叫烟绯，是璃月港最顶尖的律法专家，没有之一！商业纠纷、民事调解、刑事诉讼，样样精通，一出手就搞得定！</div><a class="blog-slider__button" href="posts/33267/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/47641/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/18/p8u6sr.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-18</span><a class="blog-slider__title" href="posts/47641/" alt="">【算法介绍】后缀数组</a><div class="blog-slider__text">能像这样见面是件好事，眼光相近的人才能共同开启一段愉快的对话。初次见面，你好，我是建筑设计师卡维，有什么事需要我帮忙的话，请先详细说明你的需求。</div><a class="blog-slider__button" href="posts/47641/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/12436/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/19/vr8ikf.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-19</span><a class="blog-slider__title" href="posts/12436/" alt="">【算法介绍】可持久化相关数据结构</a><div class="blog-slider__text">芭芭拉，闪耀登场~治疗就交给我吧，不会让你失望的！</div><a class="blog-slider__button" href="posts/12436/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/46066/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/01/23/nmaeqe.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-23</span><a class="blog-slider__title" href="posts/46066/" alt="">【算法介绍】快速傅里叶变换</a><div class="blog-slider__text">熟悉的恶魔总比不熟悉的好</div><a class="blog-slider__button" href="posts/46066/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/52802/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/02/13/gyjep7.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-02-04</span><a class="blog-slider__title" href="posts/52802/" alt="">【算法介绍】原根与离散对数</a><div class="blog-slider__text">就以奇珍万千，给各位鼓劲了……百事贞吉，一心同归~</div><a class="blog-slider__button" href="posts/52802/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/39663/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/02/12/weeu1o.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-02-10</span><a class="blog-slider__title" href="posts/39663/" alt="">【算法介绍】杜教筛和 Min_25 筛</a><div class="blog-slider__text">你可能还不明白，人类从不掩饰掌握星空的欲望，当然，也包括我在内</div><a class="blog-slider__button" href="posts/39663/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/21601/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/02/16/u012a8.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-02-16</span><a class="blog-slider__title" href="posts/21601/" alt="">【算法介绍】网络流相关</a><div class="blog-slider__text">让我摸个「鱼」吧！拜托拜托拜托…哎呀，这不就…和了！</div><a class="blog-slider__button" href="posts/21601/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/64292/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/02/26/umsvkr.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-02-26</span><a class="blog-slider__title" href="posts/64292/" alt="">【算法介绍】中国剩余定理及其拓展</a><div class="blog-slider__text">生死虚实，一念之间。洞天幻化，长梦一觉……破！</div><a class="blog-slider__button" href="posts/64292/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/52315/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/03/02/yx12en.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-03-03</span><a class="blog-slider__title" href="posts/52315/" alt="">【算法介绍】排列组合问题汇总</a><div class="blog-slider__text">为了去往远方……不管什么手段，通通拿出来吧！</div><a class="blog-slider__button" href="posts/52315/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/33291/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/03/08/nu4tvj.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-03-08</span><a class="blog-slider__title" href="posts/33291/" alt="">【奇技淫巧】欧拉函数与欧拉定理</a><div class="blog-slider__text">欧拉？有点意思哈……</div><a class="blog-slider__button" href="posts/33291/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/33386/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/03/08/do2ugt.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-03-13</span><a class="blog-slider__title" href="posts/33386/" alt="">【算法介绍】斯特林数与卡特兰数</a><div class="blog-slider__text">知道我是谁吗？没见过这么大的钻石吧？送给你啦~</div><a class="blog-slider__button" href="posts/33386/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="posts/3961/" alt=""><img width="48" height="48" src="https://image.jiuci.top/i/2025/03/16/njv326.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-03-16</span><a class="blog-slider__title" href="posts/3961/" alt="">【算法介绍】概率与期望及其计算</a><div class="blog-slider__text">好奇心，可是很危险的~谜题千千万万，但谜底却是…乌有之物。</div><a class="blog-slider__button" href="posts/3961/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>
