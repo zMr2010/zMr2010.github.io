@@ -75,3 +75,10 @@ div#post-info {
 main#content-inner {
     max-width: 94.5%;
 }
+
+body > div.post > header#page-header.post-bg:not(.nav-visible) > nav {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.4) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
